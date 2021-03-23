@@ -1,1 +1,23 @@
-<p>brand works!</p>
+<table *ngIf="dataLoaded==true" class="table"> 
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marka Adı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let brand of brands"> 
+        <td>{{brand.brandId}}</td>
+        <td>{{brand.brandName}}</td>
+        <td><button class="btn btn-success">Güncelle</button></td>
+    </tr>
+    </tbody>
+    
+</table>
+
+<div class="text-center">
+    <p></p>
+    <p></p>
+    <button routerLink = "/brands/add" class="btn btn-success">Marka Ekle</button>
+  </div>

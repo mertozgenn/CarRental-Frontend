@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Car } from 'src/app/models/car';
+import { CarDto } from 'src/app/models/carDto';
 import { Image } from 'src/app/models/image';
 import { CarService } from 'src/app/services/car.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -12,7 +12,7 @@ import { ImageService } from 'src/app/services/image.service';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
-  cars:Car[] = []
+  cars:CarDto[] = []
   images:Image[] = []
   constructor(private imageService:ImageService, private activatedRoute:ActivatedRoute, private sanitizer: DomSanitizer
             ,private carService:CarService) { }
@@ -31,7 +31,7 @@ export class CarDetailComponent implements OnInit {
   
   getCarDetails(carId:number) {
     this.carService.getCars().subscribe(response => {
-    this.cars = response.data.filter((c : Car) => c.carId == carId)
+    this.cars = response.data.filter((c : CarDto) => c.carId == carId)
     })
   }
 
