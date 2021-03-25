@@ -10,7 +10,7 @@
         <tr *ngFor = "let color of colors"> 
         <td>{{color.colorId}}</td>
         <td>{{color.colorName}}</td>
-        <td><button class="btn btn-success">Güncelle</button></td>
+        <td><button type="button" routerLink = "/colors/update/{{color.colorId}}" class="btn btn-primary">Güncelle</button></td>
     </tr>
     </tbody>
     

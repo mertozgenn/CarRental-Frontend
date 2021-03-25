@@ -1,0 +1,56 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
+            <div class="card-body">
+                <form [formGroup]="carUpdateForm">
+                    <fieldset disabled="disabled">
+                        <div class="mb-3">
+                        <label for="disabledTextInput">Car Id</label>
+                        <div class="form-group">
+                        <input type="number" id="carId" class="form-control" value="{{carId}}"/>
+                        </div>
+                    </div>
+                    </fieldset>
+                    <div class="mb-3">
+                        <label for="customerId">Araba Adı</label>
+                        <div class="form-group">
+                        <input type="text" id="description" formControlName="description" class="form-control" value="{{description}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="brandId">Marka Id</label>
+                        <div class="form-group">
+                        <input type="number" id="brandId" formControlName="brandId" class="form-control" value="{{brandId}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="colorId">Renk Id</label>
+                        <div class="form-group">
+                        <input type="number" id="colorId" formControlName="colorId" class="form-control" value="{{colorId}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyPrice">Günlük Fiyat</label>
+                        <div class="form-group">
+                        <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" value="{{dailyPrice}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelYear">Model Yılı</label>
+                        <div class="form-group">
+                        <input type="text" id="modelYear" formControlName="modelYear" class="form-control" value="{{modelYear}}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center">
+                <div class="text-center">
+                    <button (click)="update()" class="btn btn-success">Güncelle</button>
+                    <p></p>
+                    <p></p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let image of images" class="col">
       <div class="card">
-        <img [src]="getSantizeUrl(image.imagePath)" class="card-img-top" alt="...">
+        <img src="{{image.imagePath}}" class="card-img-top" alt="...">
       </div>
     </div>
   </div>
@@ -30,5 +30,11 @@
   <div *ngFor="let car of cars" class="text-center">
     <p></p>
     <p></p>
-    <button routerLink = "/rent/{{car.carId}}" class="btn btn-success">Kirala</button>
+    <button *ngIf="available==true" routerLink = "/rent/{{car.carId}}" class="btn btn-success">Kirala</button>
+  </div>
+
+  <div *ngIf="available==false" class="text-center">
+    <p></p>
+    <p></p>
+    <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Bu araba şu anda kiralanamaz</button>
   </div>

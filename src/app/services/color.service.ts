@@ -20,4 +20,8 @@ export class ColorService {
   add(color:Color) {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "add", color);
   }
+
+  update(color:Color) {
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "update", color);
+  }
 }

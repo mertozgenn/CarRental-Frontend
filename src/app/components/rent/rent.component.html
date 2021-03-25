@@ -1,1 +1,71 @@
-<p>rent works!</p>
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Kirala</h5></div>
+            <div class="card-body">
+                <form [formGroup]="rentForm">
+                    <fieldset disabled="disabled">
+                        <div class="mb-3">
+                        <label for="disabledTextInput">Fiyat</label>
+                        <div class="form-group">
+                        <input type="text" id="dailyPrice" class="form-control" placeholder="{{dailyPrice}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput">Car Id</label>
+                        <div class="form-group">
+                        <input type="number" id="carId" class="form-control" placeholder="{{carId}}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput">Kiralama Tarihi</label>
+                        <div class="form-group">
+                        <input type="text" id="rentDate" class="form-control" placeholder="{{rentDate}}"/>
+                        </div>
+                    </div>
+                    </fieldset>
+                    <div class="mb-3">
+                        <label for="customerId">Müşteri Id</label>
+                        <div class="form-group">
+                        <input type="number" id="customerId" formControlName="customerId" class="form-control" placeholder="Müşteri Id"/>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="paymentForm">
+                    <div class="card-header"><h5 class="title">Ödeme</h5></div>
+                    <div class="mb-3">
+                        <label for="cardNumber">Kart Numarası</label>
+                        <div class="form-group">
+                        <input type="number" id="cardNumber" formControlName="cardNumber" class="form-control" placeholder="Kart Numarası"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expirationDate">Son Kullanma Tarihi</label>
+                        <div class="form-group">
+                        <input type="text" id="expirationDate" formControlName="expirationDate" class="form-control" placeholder="Son Kullanma Tarihi"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cvv">CVV</label>
+                        <div class="form-group">
+                        <input type="number" id="cvv" formControlName="cvv" class="form-control" placeholder="CVV"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center">
+                <div class="text-center">
+                    <button *ngIf="available==true" (click)="add()" class="btn btn-success">Kirala</button>
+                    <p></p>
+                    <p></p>
+                  </div>
+                
+                  <div *ngIf="available==false">
+                    <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Bu araba şu anda kiralanamaz</button>
+                    <p></p>
+                    <p></p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

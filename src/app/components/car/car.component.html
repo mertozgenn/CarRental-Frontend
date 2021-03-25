@@ -21,6 +21,7 @@
             <th>Yıl</th>
             <th>Günlük Ücret</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +33,7 @@
         <td>{{car.modelYear}}</td>
         <td>{{car.dailyPrice}}</td>
         <td><button routerLink = "/cars/{{car.carId}}" class="btn btn-success">Araba Detayı</button></td>
+        <td><button type="button" routerLink = "/cars/update/{{car.carId}}" class="btn btn-primary">Güncelle</button></td>
     </tr>
     </tbody>
     

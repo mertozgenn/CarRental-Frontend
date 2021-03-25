@@ -19,4 +19,8 @@ export class BrandService {
   add(brand : Brand) {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "add", brand)
   }
+
+  update(brand : Brand) {
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "update", brand)
+  }
 }

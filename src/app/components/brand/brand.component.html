@@ -10,7 +10,7 @@
         <tr *ngFor = "let brand of brands"> 
         <td>{{brand.brandId}}</td>
         <td>{{brand.brandName}}</td>
-        <td><button class="btn btn-success">Güncelle</button></td>
+        <td><button type="button" routerLink = "/brands/update/{{brand.brandId}}" class="btn btn-primary">Güncelle</button></td>
     </tr>
     </tbody>
     

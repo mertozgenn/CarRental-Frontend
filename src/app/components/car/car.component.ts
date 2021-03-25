@@ -29,10 +29,10 @@ filterText:string
   }
 
   getCars() {
-    this.carService.getCars().subscribe(response => {
+    this.carService.getCarsDto().subscribe(response => {
       this.cars = response.data
       this.dataLoaded = true
-    })
+    }) 
   }
 
   getCarsByColor(colorId:number){
