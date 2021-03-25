@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { CarDto } from 'src/app/models/carDto';
 import { Image } from 'src/app/models/image';
@@ -16,7 +15,7 @@ export class CarDetailComponent implements OnInit {
   cars:CarDto[] = []
   images:Image[] = []
   available = false
-  constructor(private imageService:ImageService, private activatedRoute:ActivatedRoute, private sanitizer: DomSanitizer
+  constructor(private imageService:ImageService, private activatedRoute:ActivatedRoute
             ,private carService:CarService, private rentalService:RentalService) { }
 
   ngOnInit(): void {
