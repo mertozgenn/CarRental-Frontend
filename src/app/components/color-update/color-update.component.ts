@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -14,7 +14,8 @@ export class ColorUpdateComponent implements OnInit {
   colorId:number
   colorName:string
   constructor(private formBuilder:FormBuilder, private colorService:ColorService, 
-              private toastrService:ToastrService, private activatedRoute:ActivatedRoute) { }
+              private toastrService:ToastrService, private activatedRoute:ActivatedRoute,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -43,6 +44,7 @@ export class ColorUpdateComponent implements OnInit {
         console.log(colorModel)
         this.colorService.update(colorModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarılı")
+          this.router.navigate([""])
         }, responseError => {
           if(responseError.error.Errors.length > 0){
             for (let i = 0; i < responseError.error.Errors.length; i++) {

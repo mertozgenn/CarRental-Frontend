@@ -7,22 +7,37 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="customers">Müşteriler</a>
+            <a class="nav-link" routerLink="customers">Müşteriler</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="colors">Renkler</a>
+            <a class="nav-link" routerLink="colors">Renkler</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="brands">Markalar</a>
+            <a class="nav-link" routerLink="brands">Markalar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="rentals">Kiralamalar</a>
+            <a class="nav-link" routerLink="rentals">Kiralamalar</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div *ngIf="isAuthenticated==false" class="d-flex">
+          <button routerLink="login" class="btn btn-outline-success">Giriş Yap</button>
+          <button routerLink="register" class="btn btn-outline-success">Kayıt Ol</button>
+        </div>
+        <div class="d-flex">
+          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+          <li *ngIf="isAuthenticated==true" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{loggedUser.firstName}} {{loggedUser.lastName}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Profili Düzenle</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+            </ul>
+          </li>
+          </ul>
+        </div>
+        
       </div>
     </div>
   </nav>

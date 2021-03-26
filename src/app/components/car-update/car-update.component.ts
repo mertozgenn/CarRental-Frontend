@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
 
@@ -17,8 +17,10 @@ export class CarUpdateComponent implements OnInit {
   colorId:number
   dailyPrice:number
   modelYear:string
+  minFindeks:number
   constructor(private formBuilder:FormBuilder, private carService:CarService, 
-              private toastrService:ToastrService, private activatedRoute:ActivatedRoute) { }
+              private toastrService:ToastrService, private activatedRoute:ActivatedRoute,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -35,17 +37,19 @@ export class CarUpdateComponent implements OnInit {
       this.colorId = response.data.filter(c => c.carId == carId)[0].colorId
       this.dailyPrice = response.data.filter(c => c.carId == carId)[0].dailyPrice
       this.modelYear = response.data.filter(c => c.carId == carId)[0].modelYear
+      this.minFindeks = response.data.filter(c => c.carId == carId)[0].minFindeks
     })
   }
 
   createCarUpdateForm(){
     this.carUpdateForm = this.formBuilder.group({
-      carId : ["", Validators.required],
+      carId : [this.carId],
       description : ["", Validators.required],
       brandId : ["", Validators.required],
       colorId : ["", Validators.required],
       dailyPrice : ["", Validators.required],
-      modelYear : ["", Validators.required]
+      modelYear : ["", Validators.required],
+      minFindeks : ["", Validators.required]
     })
   }
 
@@ -55,6 +59,7 @@ export class CarUpdateComponent implements OnInit {
         console.log(carModel)
         this.carService.update(carModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarılı")
+          this.router.navigate([""])
         }, responseError => {
           if(responseError.error.Errors.length > 0){
             for (let i = 0; i < responseError.error.Errors.length; i++) {

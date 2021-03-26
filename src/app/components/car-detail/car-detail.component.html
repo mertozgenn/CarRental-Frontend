@@ -30,11 +30,16 @@
   <div *ngFor="let car of cars" class="text-center">
     <p></p>
     <p></p>
-    <button *ngIf="available==true" routerLink = "/rent/{{car.carId}}" class="btn btn-success">Kirala</button>
+    <button *ngIf="(available==true&&isFindeksOk==true)&&isLoggedIn==true" routerLink = "/rent/{{car.carId}}" class="btn btn-success">Kirala</button>
   </div>
 
-  <div *ngIf="available==false" class="text-center">
+  <div *ngIf="available==false&&isLoggedIn==true" class="text-center">
     <p></p>
     <p></p>
     <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Bu araba şu anda kiralanamaz</button>
+  </div>
+  <div *ngIf="isFindeksOk==false&&isLoggedIn==true"  class="text-center">
+    <p></p>
+    <p></p>
+    <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Findeks puanınız bu araba için yetersiz</button>
   </div>

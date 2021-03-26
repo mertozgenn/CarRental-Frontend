@@ -12,19 +12,24 @@ import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { ColorComponent } from './components/color/color.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { RentComponent } from './components/rent/rent.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {path:"", pathMatch:"full", component:CarComponent},
   {path:"", pathMatch:"full", component:CategoryComponent, outlet:"filter"},
+  {path:"login", component:LoginComponent},
+  {path:"register", component:RegisterComponent},
   {path:"cars", pathMatch:"full", component:CarComponent},
-  {path:"cars/add", pathMatch:"full", component:CarAddComponent}, 
-  {path:"cars/update/:carId", component: CarUpdateComponent},
-  {path:"colors/add", pathMatch:"full", component:ColorAddComponent}, 
-  {path:"colors/update/:colorId", component: ColorUpdateComponent},
-  {path:"brands/add", pathMatch:"full", component:BrandAddComponent}, 
-  {path:"brands/update/:brandId", component: BrandUpdateComponent},
+  {path:"cars/add", pathMatch:"full", component:CarAddComponent, canActivate:[LoginGuard]}, 
+  {path:"cars/update/:carId", component: CarUpdateComponent, canActivate:[LoginGuard]},
+  {path:"colors/add", pathMatch:"full", component:ColorAddComponent, canActivate:[LoginGuard]}, 
+  {path:"colors/update/:colorId", component: ColorUpdateComponent, canActivate:[LoginGuard]},
+  {path:"brands/add", pathMatch:"full", component:BrandAddComponent, canActivate:[LoginGuard]}, 
+  {path:"brands/update/:brandId", component: BrandUpdateComponent, canActivate:[LoginGuard]},
   {path:"cars", pathMatch:"full", component: CategoryComponent, outlet:"filter"},
   {path:"cars/:carId", pathMatch:"full", component:CarDetailComponent},
   {path:"cars/color/:colorId", component:CarComponent},
@@ -36,7 +41,7 @@ const routes: Routes = [
   {path:"rentals", component:RentalComponent},
   {path:"colors", component:ColorComponent},
   {path:"brands", component:BrandComponent},
-  {path:"rent/:carId", component:RentComponent},
+  {path:"rent/:carId", component:RentComponent, canActivate:[LoginGuard]},
   
 ];
 

@@ -1,0 +1,69 @@
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+<body class="text-center">
+  <main class="form-register">
+    <form [formGroup]="registerForm">
+      <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
+
+      <div class="form-floating">
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+        />
+        <label for="floatingInput">E-posta</label>
+      </div>
+      <div class="form-floating">
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+        />
+        <label for="floatingPassword">Parola</label>
+      </div>
+      <div class="form-floating">
+        <input
+          formControlName="firstName"
+          type="text"
+          class="form-control"
+          id="firstName"
+          placeholder="Adınız"
+        />
+        <label for="firstName">Adınız</label>
+      </div>
+      <div class="form-floating">
+        <input
+          formControlName="lastName"
+          type="text"
+          class="form-control"
+          id="lastName"
+          placeholder="Soyadınız"
+        />
+        <label for="lastName">Soyadınız</label>
+      </div>
+    </form>
+        <br>
+      <button (click)="register()" class="w-100 btn btn-lg btn-primary">
+        Kayıt Ol
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </main>
+</body>

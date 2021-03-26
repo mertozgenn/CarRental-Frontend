@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
@@ -11,7 +12,8 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorAddComponent implements OnInit {
   colorAddForm : FormGroup
-  constructor(private formBuilder : FormBuilder, private toastrService : ToastrService, private colorService : ColorService) { }
+  constructor(private formBuilder : FormBuilder, private toastrService : ToastrService,
+               private colorService : ColorService, private router:Router) { }
 
   ngOnInit(): void {
     this.createColorAddForm()
@@ -29,6 +31,7 @@ export class ColorAddComponent implements OnInit {
       console.log(colorModel)
       this.colorService.add(colorModel).subscribe(response => {
         this.toastrService.success(response.message, "Başarılı")
+        this.router.navigate([""])
       }, responseError => {
         if(responseError.error.Errors.length > 0){
           for (let i = 0; i < responseError.error.Errors.length; i++) {

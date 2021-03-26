@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
 import { Image } from 'src/app/models/image';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
+import { FindeksService } from 'src/app/services/findeks.service';
 import { ImageService } from 'src/app/services/image.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -15,14 +18,19 @@ export class CarDetailComponent implements OnInit {
   cars:CarDto[] = []
   images:Image[] = []
   available = false
+  isFindeksOk : boolean
+  findeks : number
+  isLoggedIn = false
   constructor(private imageService:ImageService, private activatedRoute:ActivatedRoute
-            ,private carService:CarService, private rentalService:RentalService) { }
+            ,private carService:CarService, private rentalService:RentalService,
+            private findeksService:FindeksService, private authService : AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.getCarDetails(params["carId"]);
       this.getImages(params["carId"]);
       this.checkIfAvailable(params["carId"]);
+      this.getFindeks(params["carId"])
     })
   }
   getImages(carId:number){
@@ -46,7 +54,26 @@ export class CarDetailComponent implements OnInit {
     })
   }
 
-  
+  getFindeks(carId:number) {
+    this.carService.getCars().subscribe(response => {
+    this.findeks = response.data.filter((c : Car) => c.carId == carId)[0].minFindeks
+    this.checkFindeks()
+    })
+  }
+
+  checkFindeks(){
+    this.authService.getUserId().subscribe(response => {
+    if(response > 0){
+      this.isLoggedIn = true
+      this.isFindeksOk = (this.findeksService.getFindeks(response) >= this.findeks)
+      console.log(this.isFindeksOk)
+      console.log(this.findeks)
+      console.log(this.findeksService.getFindeks(response))
+    } else {
+      this.isFindeksOk = false
+    }
+    })
+  }
 
   checkIfAvailable(carId:number){
     this.rentalService.getRentals().subscribe(response => {
