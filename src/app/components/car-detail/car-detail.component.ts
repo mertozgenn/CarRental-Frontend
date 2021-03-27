@@ -62,17 +62,17 @@ export class CarDetailComponent implements OnInit {
   }
 
   checkFindeks(){
-    this.authService.getUserId().subscribe(response => {
-    if(response > 0){
+    let userId = localStorage.getItem("userId")
+    if(userId != null){
       this.isLoggedIn = true
-      this.isFindeksOk = (this.findeksService.getFindeks(response) >= this.findeks)
+      this.isFindeksOk = (this.findeksService.getFindeks(parseInt(userId)) >= this.findeks)
       console.log(this.isFindeksOk)
       console.log(this.findeks)
-      console.log(this.findeksService.getFindeks(response))
+      console.log(this.findeksService.getFindeks(parseInt(userId)))
     } else {
+      this.isLoggedIn = false
       this.isFindeksOk = false
     }
-    })
   }
 
   checkIfAvailable(carId:number){

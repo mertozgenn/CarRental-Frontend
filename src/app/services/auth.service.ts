@@ -27,10 +27,6 @@ export class AuthService {
    return this.httpClient.get<number>(this.apiUrl + "auth/getuserid")
   }
 
-  getUser(userId:number) : Observable<ListResponseModel<User>>{
-    return this.httpClient.get<ListResponseModel<User>>(this.apiUrl + "users/getbyid?userid=" + userId)
-  }
-
   isAuthenticated(){
     if(localStorage.getItem("token")){
       return true;

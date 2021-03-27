@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe(response => {
         this.toastrService.info(response.message)
         localStorage.setItem("token", response.data.token)
+        this.setUserId()
         console.log(response)
         this.router.navigate([""])
       }, responseError => {
@@ -40,6 +41,13 @@ export class LoginComponent implements OnInit {
         console.log(responseError)
       })
     }
+  }
+
+  setUserId(){
+    this.authService.getUserId().subscribe(userId => {
+      localStorage.setItem("userId", userId.toString())
+      location.reload()
+    })
   }
 
 }

@@ -1,0 +1,70 @@
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+  
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  
+  <body class="text-center">
+    <main class="form-register">
+      <form [formGroup]="userForm">
+        <h1 class="h3 mb-3 fw-normal">Profilini Düzenle</h1>
+  
+        <div class="form-floating">
+          <input
+            formControlName="email"
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            value="{{userToUpdate.email}}"
+          />
+          <label for="floatingInput">E-posta</label>
+        </div>
+        <div class="form-floating">
+          <input
+            formControlName="firstName"
+            type="text"
+            class="form-control"
+            id="firstName"
+            value="{{userToUpdate.firstName}}"
+          />
+          <label for="firstName">Adınız</label>
+        </div>
+        <div class="form-floating">
+          <input
+            formControlName="lastName"
+            type="text"
+            class="form-control"
+            id="lastName"
+            value="{{userToUpdate.lastName}}"
+          />
+          <label for="lastName">Soyadınız</label>
+        </div>
+        <div class="form-floating">
+          <input
+            formControlName="companyName"
+            type="text"
+            class="form-control"
+            id="companyName"
+            value="{{userToUpdate.companyName}}"
+          />
+          <label for="companyName">Şirket Adı</label>
+        </div>
+      </form>
+          <br>
+        <button (click)="update()" class="w-100 btn btn-lg btn-primary">
+          Güncelle
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </main>
+  </body>
+  

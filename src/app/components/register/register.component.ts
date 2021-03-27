@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Customer } from 'src/app/models/customer';
 import { AuthService } from 'src/app/services/auth.service';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ export class RegisterComponent implements OnInit {
   registerForm:FormGroup
 
   constructor(private formBuilder:FormBuilder, private authService:AuthService,
-               private toastrService:ToastrService, private router:Router) { }
+               private toastrService:ToastrService, private router:Router, private customerService : CustomerService) { }
 
   ngOnInit(): void {
     this.createRegisterForm()
@@ -24,7 +26,8 @@ export class RegisterComponent implements OnInit {
       email:["", Validators.required],
       password:["", Validators.required],
       firstName:["", Validators.required],
-      lastName:["", Validators.required]
+      lastName:["", Validators.required],
+      companyName:["", Validators.required]
     })
   }
 
@@ -35,13 +38,26 @@ export class RegisterComponent implements OnInit {
       this.authService.register(registerModel).subscribe(response => {
         this.toastrService.info(response.message)
         localStorage.setItem("token", response.data.token)
+        this.authService.getUserId().subscribe(userId => {
+          localStorage.setItem("userId", userId.toString())
+          this.addCustomer()
+        })
         console.log(response)
-        this.router.navigate([""])
       }, responseError => {
         this.toastrService.error(responseError.error)
         console.log(responseError)
       })
     }
+  }
+
+  addCustomer(){
+    let customerModel : Customer = Object.assign({}, this.registerForm.value)
+    customerModel.userId = parseInt(localStorage.getItem("userId")!)
+    this.customerService.add(customerModel).subscribe(response => {
+      console.log(response)
+    })
+    location.reload()
+    this.router.navigate([""])
   }
 
 

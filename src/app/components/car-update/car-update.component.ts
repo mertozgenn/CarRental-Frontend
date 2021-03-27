@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -11,39 +12,32 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarUpdateComponent implements OnInit {
   carUpdateForm : FormGroup
-  carId:number
-  description:string
-  brandId:number
-  colorId:number
-  dailyPrice:number
-  modelYear:string
-  minFindeks:number
+  carToUpdate : Car = {carId : 0, brandId : 0, colorId : 0, modelYear:"", dailyPrice:0, description:"", minFindeks:0}
   constructor(private formBuilder:FormBuilder, private carService:CarService, 
               private toastrService:ToastrService, private activatedRoute:ActivatedRoute,
               private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.carId = parseInt((params["carId"]));
+      console.log(parseInt((params["carId"])))
+      this.carToUpdate.carId = parseInt((params["carId"]))
+      console.log(this.carToUpdate)
       this.getCarDetails(parseInt((params["carId"])))
+      console.log(this.carToUpdate)
+      this.createCarUpdateForm()
     })
-    this.createCarUpdateForm()
+    
   }
 
   getCarDetails(carId:number){
     this.carService.getCars().subscribe(response => {
-      this.description = response.data.filter(c => c.carId == carId)[0].description
-      this.brandId = response.data.filter(c => c.carId == carId)[0].brandId
-      this.colorId = response.data.filter(c => c.carId == carId)[0].colorId
-      this.dailyPrice = response.data.filter(c => c.carId == carId)[0].dailyPrice
-      this.modelYear = response.data.filter(c => c.carId == carId)[0].modelYear
-      this.minFindeks = response.data.filter(c => c.carId == carId)[0].minFindeks
+      this.carToUpdate = response.data.filter(c => c.carId == carId)[0]
     })
   }
 
   createCarUpdateForm(){
     this.carUpdateForm = this.formBuilder.group({
-      carId : [this.carId],
+      carId : [this.carToUpdate.carId],
       description : ["", Validators.required],
       brandId : ["", Validators.required],
       colorId : ["", Validators.required],

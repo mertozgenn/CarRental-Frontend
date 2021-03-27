@@ -1,4 +1,4 @@
-<div class="content">
+<div *ngIf="carToUpdate" class="content">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
@@ -8,44 +8,44 @@
                         <div class="mb-3">
                         <label for="disabledTextInput">Car Id</label>
                         <div class="form-group">
-                        <input type="number" id="carId" class="form-control" value="{{carId}}"/>
+                        <input type="number" id="carId" class="form-control" value="{{carToUpdate.carId}}"/>
                         </div>
                     </div>
                     </fieldset>
                     <div class="mb-3">
                         <label for="customerId">Araba Adı</label>
                         <div class="form-group">
-                        <input type="text" id="description" formControlName="description" class="form-control" value="{{description}}"/>
+                        <input type="text" id="description" formControlName="description" class="form-control" value="{{carToUpdate.description}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="brandId">Marka Id</label>
                         <div class="form-group">
-                        <input type="number" id="brandId" formControlName="brandId" class="form-control" value="{{brandId}}"/>
+                        <input type="number" id="brandId" formControlName="brandId" class="form-control" value="{{carToUpdate.brandId}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="colorId">Renk Id</label>
                         <div class="form-group">
-                        <input type="number" id="colorId" formControlName="colorId" class="form-control" value="{{colorId}}"/>
+                        <input type="number" id="colorId" formControlName="colorId" class="form-control" value="{{carToUpdate.colorId}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="dailyPrice">Günlük Fiyat</label>
                         <div class="form-group">
-                        <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" value="{{dailyPrice}}"/>
+                        <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" value="{{carToUpdate.dailyPrice}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="modelYear">Model Yılı</label>
                         <div class="form-group">
-                        <input type="text" id="modelYear" formControlName="modelYear" class="form-control" value="{{modelYear}}"/>
+                        <input type="text" id="modelYear" formControlName="modelYear" class="form-control" value="{{carToUpdate.modelYear}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="minFindeks">Min Findeks</label>
                         <div class="form-group">
-                        <input type="number" id="minFindeks" formControlName="minFindeks" class="form-control" value="{{minFindeks}}"/>
+                        <input type="number" id="minFindeks" formControlName="minFindeks" class="form-control" value="{{carToUpdate.minFindeks}}"/>
                         </div>
                     </div>
                 </form>

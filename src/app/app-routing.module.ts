@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentComponent } from './components/rent/rent.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:"", pathMatch:"full", component:CategoryComponent, outlet:"filter"},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
+  {path:"user/update", component:UserUpdateComponent},
   {path:"cars", pathMatch:"full", component:CarComponent},
   {path:"cars/add", pathMatch:"full", component:CarAddComponent, canActivate:[LoginGuard]}, 
   {path:"cars/update/:carId", component: CarUpdateComponent, canActivate:[LoginGuard]},
@@ -46,7 +48,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation:'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
