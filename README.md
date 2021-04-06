@@ -1,11 +1,11 @@
-[TOCM]
 
 ### About Project
 
 - This project is a car rental front-end project for [kodlama.io](https://www.kodlama.io) assignments
 - [Back-end](https://github.com/mertozgenn/ReCapProject)
 ---
-###Images
+
+### Images
 
 
 ![](https://user-images.githubusercontent.com/78684195/113748831-a09fd680-9711-11eb-9edd-a4b676f8a1d2.png)
@@ -41,7 +41,7 @@
 > Register
 
 ---
-###Notes
+### Notes
 
 - Findeks and payment processes are not real.
 
