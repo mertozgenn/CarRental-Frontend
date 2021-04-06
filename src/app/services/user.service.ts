@@ -21,4 +21,8 @@ export class UserService {
   updateUser(user:User) : Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl + "users/update", user)
   }
+
+  changePassword(password:string){
+    return this.httpClient.post(this.apiUrl + "users/changepassword", {"password" : password})
+  }
 }

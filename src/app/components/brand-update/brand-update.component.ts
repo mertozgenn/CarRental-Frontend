@@ -40,7 +40,6 @@ export class BrandUpdateComponent implements OnInit {
   update(){
       if(this.brandUpdateForm.valid){
         let brandModel = Object.assign({}, this.brandUpdateForm.value)
-        console.log(brandModel)
         this.brandService.update(brandModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarılı")
         }, responseError => {

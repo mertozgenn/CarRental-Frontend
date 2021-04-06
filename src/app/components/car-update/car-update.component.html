@@ -1,62 +1,134 @@
 <div *ngIf="carToUpdate" class="content">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
-            <div class="card-body">
-                <form [formGroup]="carUpdateForm">
-                    <fieldset disabled="disabled">
-                        <div class="mb-3">
-                        <label for="disabledTextInput">Car Id</label>
-                        <div class="form-group">
-                        <input type="number" id="carId" class="form-control" value="{{carToUpdate.carId}}"/>
-                        </div>
-                    </div>
-                    </fieldset>
-                    <div class="mb-3">
-                        <label for="customerId">Araba Adı</label>
-                        <div class="form-group">
-                        <input type="text" id="description" formControlName="description" class="form-control" value="{{carToUpdate.description}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="brandId">Marka Id</label>
-                        <div class="form-group">
-                        <input type="number" id="brandId" formControlName="brandId" class="form-control" value="{{carToUpdate.brandId}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="colorId">Renk Id</label>
-                        <div class="form-group">
-                        <input type="number" id="colorId" formControlName="colorId" class="form-control" value="{{carToUpdate.colorId}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="dailyPrice">Günlük Fiyat</label>
-                        <div class="form-group">
-                        <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" value="{{carToUpdate.dailyPrice}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="modelYear">Model Yılı</label>
-                        <div class="form-group">
-                        <input type="text" id="modelYear" formControlName="modelYear" class="form-control" value="{{carToUpdate.modelYear}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="minFindeks">Min Findeks</label>
-                        <div class="form-group">
-                        <input type="number" id="minFindeks" formControlName="minFindeks" class="form-control" value="{{carToUpdate.minFindeks}}"/>
-                        </div>
-                    </div>
-                </form>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Araba Güncelle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carUpdateForm">
+          <fieldset disabled="disabled">
+            <div class="mb-3">
+              <label for="disabledTextInput">Car Id</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="carId"
+                  class="form-control"
+                  value="{{ carToUpdate.carId }}"
+                />
+              </div>
             </div>
-            <div class="text-center">
-                <div class="text-center">
-                    <button (click)="update()" class="btn btn-success">Güncelle</button>
-                    <p></p>
-                    <p></p>
-                  </div>
+          </fieldset>
+          <div class="mb-3">
+            <label for="customerId">Araba Adı</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="description"
+                formControlName="description"
+                class="form-control"
+                value="{{ carToUpdate.description }}"
+              />
             </div>
+          </div>
+          <div class="mb-3">
+            <label for="brandId">Marka Id</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="brandId"
+                formControlName="brandId"
+                class="form-control"
+                value="{{ carToUpdate.brandId }}"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="colorId">Renk Id</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="colorId"
+                formControlName="colorId"
+                class="form-control"
+                value="{{ carToUpdate.colorId }}"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="dailyPrice">Günlük Fiyat</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="dailyPrice"
+                formControlName="dailyPrice"
+                class="form-control"
+                value="{{ carToUpdate.dailyPrice }}"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="modelYear">Model Yılı</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="modelYear"
+                formControlName="modelYear"
+                class="form-control"
+                value="{{ carToUpdate.modelYear }}"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="minFindeks">Min Findeks</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="minFindeks"
+                formControlName="minFindeks"
+                class="form-control"
+                value="{{ carToUpdate.minFindeks }}"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <h3><strong>Araç Fotoğrafları</strong></h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div *ngFor="let image of images" class="col">
+          <div class="card">
+            <img src="{{imageFolder}}{{ image.imagePath }}" class="card-img-top" alt="..." />
+          </div>
+          <div class="text-center">
+            <button
+              type="button"
+              *ngIf="isDefault(image)"
+              (click)="deleteImage(image)"
+              class="btn btn-danger"
+            >
+              Sil
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="card-body" *ngIf="images.length == 5">
+        <strong>Bir arabanın en fazla 5 fotoğrafı olabilir</strong> 
+      </div>
+      <div *ngIf="images.length < 5" class="form-control">
+        <label for="file">Resim Yükle</label>
+        <input
+          id="file"
+          type="file"
+          class="form-control"
+          (change)="selectFile($event)"
+        />
+      </div>
+      <div class="text-center">
+        <div class="text-center">
+          <button (click)="update()" class="btn btn-success">Güncelle</button>
+          <button (click)="deleteCar()" class="btn btn-danger">Arabayı Sil</button>
+          <p></p>
+          <p></p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

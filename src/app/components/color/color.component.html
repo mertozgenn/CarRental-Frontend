@@ -11,6 +11,7 @@
         <td>{{color.colorId}}</td>
         <td>{{color.colorName}}</td>
         <td><button type="button" routerLink = "/colors/update/{{color.colorId}}" class="btn btn-primary">Güncelle</button></td>
+        <td><button type="button" (click)="delete(color)" class="btn btn-danger">Sil</button></td>
     </tr>
     </tbody>
     

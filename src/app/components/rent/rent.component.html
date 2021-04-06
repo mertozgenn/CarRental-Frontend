@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header"><h5 class="title">Kirala</h5></div>
             <div class="card-body">
-                <form [formGroup]="rentForm">
+                <form>
                     <fieldset disabled="disabled">
                         <div class="mb-3">
                         <label for="disabledTextInput">Fiyat</label>
@@ -18,15 +18,13 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="disabledTextInput">Kiralama Tarihi</label>
-                        <div class="form-group">
-                        <input type="text" id="rentDate" class="form-control" value="{{rentDate}}"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
                         <label for="disabledTextInput">Şirket Adı</label>
                         <div class="form-group">
                         <input type="text" id="companyName" class="form-control" value="{{companyName}}"/>
+                        </div>
+                        <label for="disabledTextInput">Müşteri id</label>
+                        <div class="form-group">
+                        <input type="number" id="customerId" class="form-control" value="{{customerId}}"/>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -36,69 +34,35 @@
                         </div>
                     </div>
                 </fieldset>
-                </form>
-                <div *ngIf="savedCard">
-                    <div class="card-header"><h5 class="title">Kayıtlı Kredi Kartınız:</h5></div>
-                    <div class="card" style="width: 18rem;">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item"> <strong>Kart Sahibinin Adı: </strong>{{savedCard.name}}</li>
-                          <li class="list-group-item"><strong>CVV: </strong>{{savedCard.cvv}}</li>
-                          <li class="list-group-item"><strong>Son Kullanma Tarihi: </strong>{{savedCard.expiration}}</li>
-                          <li class="list-group-item"><strong>Kart Numarası: </strong>{{savedCard.cardNumber}}</li>
-                        </ul>
-                        <div class="card-footer">
-                            <div class="text-center">
-                                <button *ngIf="available==true" (click)="rent()" class="btn btn-success">Kayıtlı Kart ile Kirala</button>
-                                <p></p>
-                                <p></p>
-                              </div>
-                          </div>
-                      </div> 
+                </form>  
+                    <label for="rentDate">Kiralama Tarihi:</label>
+                    <input type="date" id="rentDate" (input)="calculate()" [(ngModel)]="rentDate" name="rentDate">
+                    
+
+                    <label for="returnDate">Geri Verme Tarihi</label>
+                    <input type="date" id="returnDate" [(ngModel)]="returnDate" (input)="calculate()"  name="returnDate">
+                    
+                <fieldset *ngIf="returnDate != null && available == true" disabled="disabled">
+                <div *ngIf="totalPrice != null" class="mb-3">
+                    <label for="totalPrice">Toplam Ücret</label>
+                    <div class="form-group">
+                    <input type="number" id="totalPrice" value="{{totalPrice}}"/> TL
+                    </div>
                 </div>
-                <form [formGroup]="paymentForm">
-                    <div class="card-header"><h5 class="title">Ödeme</h5></div>
-                    <div class="mb-3">
-                        <label for="name">Kart üzerindeki isim soyisim</label>
-                        <div class="form-group">
-                        <input type="text" id="name" formControlName="name" class="form-control" placeholder="İsim Soyisim"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardNumber">Kart Numarası</label>
-                        <div class="form-group">
-                        <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control" placeholder="Kart Numarası"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="expiration">Son Kullanma Tarihi</label>
-                        <div class="form-group">
-                        <input type="text" id="expiration" formControlName="expiration" class="form-control" placeholder="Son Kullanma Tarihi"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cvv">CVV</label>
-                        <div class="form-group">
-                        <input type="number" id="cvv" formControlName="cvv" class="form-control" placeholder="CVV"/>
-                        </div>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" [checked]="save" (change)="save = !save" id="save-info">
-                        <label class="form-check-label" for="save-info">Kredi Kartını Kaydet</label>
-                      </div>
-                </form>
-            </div>
-            <div class="text-center">
+                </fieldset>
                 <div class="text-center">
-                    <button *ngIf="available==true" (click)="rent()" class="btn btn-success">Kirala</button>
-                    <p></p>
-                    <p></p>
-                  </div>
-                
-                  <div *ngIf="available==false">
-                    <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Bu araba şu anda kiralanamaz</button>
-                    <p></p>
-                    <p></p>
-                  </div>
+                    <div class="text-center">
+                        <button *ngIf="available==true" (click)="goPayment()" class="btn btn-success">Ödeme Sayfasına Geç</button>
+                        <p></p>
+                        <p></p>
+                      </div>
+                    
+                      <div *ngIf="available==false">
+                        <button type="button" disabled data-bs-toggle="button" class="btn btn-danger">Seçilen Tarih Aralığında Araba Uygun Değil</button>
+                        <p></p>
+                        <p></p>
+                      </div>
+                </div>
             </div>
         </div>
     </div>

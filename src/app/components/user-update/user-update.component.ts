@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CreditCard } from 'src/app/models/creditCard';
 import { Customer } from 'src/app/models/customer';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,16 +17,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserUpdateComponent implements OnInit {
   userForm:FormGroup
+  email : string
+  firstName : string
+  lastName : string
+  companyName : string
+  newPasswordForm : FormGroup
+  savedCard: CreditCard;
   userToUpdate : User = {companyName:"", email:"", firstName:"", lastName:""}
 
   constructor(private formBuilder:FormBuilder, private authService:AuthService,
                private toastrService:ToastrService, private router:Router, private customerService : CustomerService,
-                private userService : UserService) { }
+                private userService : UserService, private creditCardService:CreditCardService) { }
 
   ngOnInit(): void {
     this.getUserDetails()
-    console.log(this.userToUpdate)
-    this.createUserForm()
+    this.getSavedCard()
+    this.createUserForm();
+    this.createNewPasswordForm()
   }
 
   createUserForm(){
@@ -36,24 +45,50 @@ export class UserUpdateComponent implements OnInit {
     })
   }
 
+  createNewPasswordForm(){
+    this.newPasswordForm = this.formBuilder.group({
+      newPassword : ["", Validators.required],
+      newPasswordAgain : ["", Validators.required]
+    })
+  }
+
   getUserDetails(){
     this.userService.getUser(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
       this.userToUpdate = response.data[0]
     })
   }
+  getSavedCard() {
+    this.creditCardService.getCreditCard().subscribe((response) => {
+      this.savedCard = response.data;
+    });
+  }
 
   update(){
     if(this.userForm.valid){
-      console.log(this.userForm.value)
       let userModel = Object.assign({}, this.userForm.value)
       this.userService.updateUser(userModel).subscribe(response => {
         this.toastrService.info(response.message)
         this.updateCustomer()
-        console.log(response)
       }, responseError => {
         this.toastrService.error(responseError.error)
-        console.log(responseError)
       })
+    }else{
+      this.toastrService.error("Forum Hatalı", "Hata")
+    }
+  }
+
+  updatePassword(){
+    if(this.newPasswordForm.valid){
+      let newPasswordModel = Object.assign({}, this.newPasswordForm.value)
+      if(newPasswordModel.newPassword == newPasswordModel.newPasswordAgain){
+        this.userService.changePassword(newPasswordModel.newPassword).subscribe(response => {
+          this.toastrService.success("Şifre Değiştirildi", "Başarılı")
+        }, responseError => {
+          this.toastrService.error("Hata oluştu", "Hata")
+        })
+      }else{
+        this.toastrService.error("Yeni Şifreler Aynı Değil", "Hata")
+      }
     }
   }
 
@@ -61,8 +96,15 @@ export class UserUpdateComponent implements OnInit {
     let customerModel : Customer = Object.assign({}, this.userForm.value)
     customerModel.userId = parseInt(localStorage.getItem("userId")!)
     this.customerService.update(customerModel).subscribe(response => {
-      console.log(response)
       this.router.navigate([""])
+    })
+  }
+
+  deleteCard(){
+    this.creditCardService.delete(this.savedCard).subscribe(response => {
+      this.toastrService.success("Silindi", "Başarılı")
+    }, responseError => {
+      this.toastrService.error("Hata oluştu", "Başarısız")
     })
   }
 }

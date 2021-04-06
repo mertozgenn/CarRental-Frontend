@@ -28,6 +28,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
     BrandUpdateComponent,
     LoginComponent,
     RegisterComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    PaymentComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

@@ -23,4 +23,8 @@ export class BrandService {
   update(brand : Brand) {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "update", brand)
   }
+
+  delete(brand : Brand) {
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "delete", brand)
+  }
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
 import { CarDto } from 'src/app/models/carDto';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car',
@@ -10,10 +14,15 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarComponent implements OnInit {
 cars: CarDto[] = [];
+brands : Brand[] = []
+selectedBrandName : string = "Marka Seçin"
+colors : Color[] = []
+selectedColorName : string = "Renk Seçin"
 dataLoaded = false;
 filterText:string
 
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService, private activatedRoute:ActivatedRoute,
+              private colorService:ColorService, private brandService : BrandService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -26,6 +35,8 @@ filterText:string
         this.getCars();
       }
     })
+    this.getColors()
+    this.getBrands()
   }
 
   getCars() {
@@ -33,6 +44,27 @@ filterText:string
       this.cars = response.data
       this.dataLoaded = true
     }) 
+  }
+
+  getColors(){
+    this.colorService.getColors().subscribe(response => {
+      this.colors = response.data;
+    })
+  }
+
+  getBrands(){
+    this.brandService.getBrands().subscribe(response => {
+      this.brands = response.data;
+    })
+  }
+
+  applyFilter(){
+    this.carService.getCarsDto().subscribe(response => {
+      if(this.selectedColorName != "Renk Seçin")
+      this.cars = response.data.filter(c => c.colorName == this.selectedColorName)
+      if(this.selectedBrandName != "Marka Seçin")
+      this.cars = response.data.filter(c => c.brandName == this.selectedBrandName)
+    })
   }
 
   getCarsByColor(colorId:number){

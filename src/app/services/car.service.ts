@@ -40,4 +40,9 @@ export class CarService {
   update(car:Car) {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "cars/update", car);
   }
+
+  delete(car : Car){
+    let url = this.apiUrl + "cars/delete"
+    return this.httpClient.post<ResponseModel>(url,car)
+  }
 }

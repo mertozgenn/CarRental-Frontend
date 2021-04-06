@@ -41,7 +41,6 @@ export class ColorUpdateComponent implements OnInit {
   update(){
       if(this.colorUpdateForm.valid){
         let colorModel = Object.assign({}, this.colorUpdateForm.value)
-        console.log(colorModel)
         this.colorService.update(colorModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarılı")
           this.router.navigate([""])

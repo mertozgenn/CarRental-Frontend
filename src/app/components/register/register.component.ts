@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
   register(){
     if(this.registerForm.valid){
-      console.log(this.registerForm.value)
       let registerModel = Object.assign({}, this.registerForm.value)
       this.authService.register(registerModel).subscribe(response => {
         this.toastrService.info(response.message)
@@ -42,10 +41,8 @@ export class RegisterComponent implements OnInit {
           localStorage.setItem("userId", userId.toString())
           this.addCustomer()
         })
-        console.log(response)
       }, responseError => {
         this.toastrService.error(responseError.error)
-        console.log(responseError)
       })
     }
   }
@@ -54,7 +51,6 @@ export class RegisterComponent implements OnInit {
     let customerModel : Customer = Object.assign({}, this.registerForm.value)
     customerModel.userId = parseInt(localStorage.getItem("userId")!)
     this.customerService.add(customerModel).subscribe(response => {
-      console.log(response)
     })
     location.reload()
     this.router.navigate([""])

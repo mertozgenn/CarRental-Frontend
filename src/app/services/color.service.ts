@@ -24,4 +24,8 @@ export class ColorService {
   update(color:Color) {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "update", color);
   }
+
+  delete(color:Color) {
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "delete", color);
+  }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
@@ -12,6 +13,8 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class RentalService {
   apiUrl = 'https://localhost:44350/api/'
+  private rentModel : Rental
+  private totalPrice : number
   constructor(private httpClient : HttpClient) { }
 
   getRentalsDto() : Observable<ListResponseModel<RentalDto>> {
@@ -26,7 +29,25 @@ export class RentalService {
 
   addRental(rental:Rental) {
     let url = this.apiUrl + "rentals/add"
-    console.log(rental)
     return this.httpClient.post<ResponseModel>(url, rental)
   }
+
+  setRentModel(rentModel : Rental) {
+    this.rentModel = rentModel
+  }
+
+  getRentModel() {
+    return this.rentModel
+  }
+
+  setTotalPrice(totalPrice : number) {
+    this.totalPrice = totalPrice
+  }
+
+  getTotalPrice() {
+    return this.totalPrice
+  }
+
+  
+
 }

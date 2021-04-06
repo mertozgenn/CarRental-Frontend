@@ -1,3 +1,7 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
 <table *ngIf="dataLoaded==true" class="table"> 
     <thead>
         <tr>
@@ -11,6 +15,7 @@
         <td>{{brand.brandId}}</td>
         <td>{{brand.brandName}}</td>
         <td><button type="button" routerLink = "/brands/update/{{brand.brandId}}" class="btn btn-primary">Güncelle</button></td>
+        <td><button type="button" (click)="delete(brand)" class="btn btn-danger">Sil</button></td>
     </tr>
     </tbody>
     

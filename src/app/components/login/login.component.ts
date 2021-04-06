@@ -28,17 +28,14 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value)
       let loginModel = Object.assign({}, this.loginForm.value)
       this.authService.login(loginModel).subscribe(response => {
         this.toastrService.info(response.message)
         localStorage.setItem("token", response.data.token)
         this.setUserId()
-        console.log(response)
         this.router.navigate([""])
       }, responseError => {
         this.toastrService.error(responseError.error)
-        console.log(responseError)
       })
     }
   }

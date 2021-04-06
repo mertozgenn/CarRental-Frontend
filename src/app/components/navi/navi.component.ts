@@ -23,7 +23,6 @@ export class NaviComponent implements OnInit {
 
   getUser(){
         this.userId = localStorage.getItem("userId")
-        console.log(this.userId)
         if(this.userId != null){
           this.getLoggedUser(this.userId)
         }
@@ -32,7 +31,6 @@ export class NaviComponent implements OnInit {
   getLoggedUser(userId:number){
     this.userService.getUser(userId).subscribe(response => {
       this.loggedUser = response.data[0]
-      console.log(response.data)
       this.isAuthenticated = this.authService.isAuthenticated()
     })
   }

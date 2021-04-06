@@ -1,70 +1,158 @@
 <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
     }
-  
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
-  
-  <body class="text-center">
-    <main class="form-register">
-      <form [formGroup]="userForm">
-        <h1 class="h3 mb-3 fw-normal">Profilini Düzenle</h1>
-  
-        <div class="form-floating">
-          <input
-            formControlName="email"
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            value="{{userToUpdate.email}}"
-          />
-          <label for="floatingInput">E-posta</label>
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <body class="text-center">
+        <main class="form-register">
+          <form [formGroup]="userForm">
+            <h1 class="h3 mb-3 fw-normal">Profilini Düzenle</h1>
+
+            <div class="form-floating">
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                value="{{ userToUpdate.email }}"
+              />
+              <label for="floatingInput">E-posta</label>
+            </div>
+            <div class="form-floating">
+              <input
+                formControlName="firstName"
+                type="text"
+                class="form-control"
+                id="firstName"
+                value="{{ userToUpdate.firstName }}"
+              />
+              <label for="firstName">Adınız</label>
+            </div>
+            <div class="form-floating">
+              <input
+                formControlName="lastName"
+                type="text"
+                class="form-control"
+                id="lastName"
+                value="{{ userToUpdate.lastName }}"
+              />
+              <label for="lastName">Soyadınız</label>
+            </div>
+            <div class="form-floating">
+              <input
+                formControlName="companyName"
+                type="text"
+                class="form-control"
+                id="companyName"
+                value="{{ userToUpdate.companyName }}"
+              />
+              <label for="companyName">Şirket Adı</label>
+            </div>
+          </form>
+          <br />
+          <button (click)="update()" class="w-100 btn btn-lg btn-primary">
+            Güncelle
+          </button>
+        </main>
+      </body>
+    </div>
+    <div class="col">
+      <br />
+      <br />
+      <br />
+      <div *ngIf="savedCard">
+        <div class="card-header">
+          <h5 class="title">Kayıtlı Kredi Kartınız:</h5>
         </div>
-        <div class="form-floating">
-          <input
-            formControlName="firstName"
-            type="text"
-            class="form-control"
-            id="firstName"
-            value="{{userToUpdate.firstName}}"
-          />
-          <label for="firstName">Adınız</label>
+        <div class="card-body" style="width: 18rem">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Kart Sahibinin Adı: </strong>{{ savedCard.name }}
+            </li>
+            <li class="list-group-item">
+              <strong>CVV: </strong>{{ savedCard.cvv }}
+            </li>
+            <li class="list-group-item">
+              <strong>Son Kullanma Tarihi: </strong>{{ savedCard.expiration }}
+            </li>
+            <li class="list-group-item">
+              <strong>Kart Numarası: </strong>{{ savedCard.cardNumber }}
+            </li>
+          </ul>
         </div>
-        <div class="form-floating">
-          <input
-            formControlName="lastName"
-            type="text"
-            class="form-control"
-            id="lastName"
-            value="{{userToUpdate.lastName}}"
-          />
-          <label for="lastName">Soyadınız</label>
+        <div class="text-center">
+          <p></p>
+          <p></p>
+          <button type="button" (click)="deleteCard()" class="btn btn-danger">
+            Sil
+          </button>
         </div>
-        <div class="form-floating">
-          <input
-            formControlName="companyName"
-            type="text"
-            class="form-control"
-            id="companyName"
-            value="{{userToUpdate.companyName}}"
-          />
-          <label for="companyName">Şirket Adı</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="content">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Şifrenizi Değiştirin</h5>
+              </div>
+              <div class="card-body">
+                <form [formGroup]="newPasswordForm">
+                  <div class="row">
+                    <div class="col">
+                      <label for="newPassword">Yeni şifreniz</label>
+                      <div class="form-group">
+                        <input
+                          type="password"
+                          id="newPassword"
+                          formControlName="newPassword"
+                          class="form-control"
+                          placeholder="Yeni şifreniz"
+                        />
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label for="newPasswordAgain">Yeni şifreniz Tekrar</label>
+                      <div class="form-group">
+                        <input
+                          type="password"
+                          id="newPasswordAgain"
+                          formControlName="newPasswordAgain"
+                          class="form-control"
+                          placeholder="Yeni şifreniz Tekrar"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <button
+                  class="btn btn-fill btn-primary"
+                  (click)="updatePassword()"
+                >
+                  Değiştir
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
-          <br>
-        <button (click)="update()" class="w-100 btn btn-lg btn-primary">
-          Güncelle
-        </button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </main>
-  </body>
-  
+      </div>
+    </div>
+  </div>
+</div>
