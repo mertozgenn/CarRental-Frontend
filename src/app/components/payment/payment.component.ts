@@ -94,7 +94,7 @@ export class PaymentComponent implements OnInit {
           let rentModel = this.rentalService.getRentModel()
           this.rentalService.addRental(rentModel).subscribe(
             (response) => {
-              if (this.save) this.saveCreditCard();
+              this.router.navigate(["/"])
               this.toastrService.success(response.message, 'Başarılı');
             },
             (responseError) => {
