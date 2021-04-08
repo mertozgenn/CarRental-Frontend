@@ -41,10 +41,10 @@ const routes: Routes = [
   {path:"cars/color", component: CategoryComponent, outlet : "filter"},
   {path:"cars/brand/:brandId", component:CarComponent},
   {path:"cars/brand/", component: CategoryComponent, outlet : "filter"},
-  {path:"customers", component:CustomerComponent},
-  {path:"rentals", component:RentalComponent},
-  {path:"colors", component:ColorComponent},
-  {path:"brands", component:BrandComponent},
+  {path:"customers", component:CustomerComponent, canActivate:[LoginGuard]},
+  {path:"rentals", component:RentalComponent, canActivate:[LoginGuard]},
+  {path:"colors", component:ColorComponent, canActivate:[LoginGuard]},
+  {path:"brands", component:BrandComponent, canActivate:[LoginGuard]},
   {path:"rent/:carId", component:RentComponent, canActivate:[LoginGuard]},
   
 ];
