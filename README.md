@@ -16,7 +16,7 @@
 
 > Car Detail
 
-![](https://user-images.githubusercontent.com/78684195/113749098-e9f02600-9711-11eb-8b15-4eeaa40a2b9c.png)
+![](https://user-images.githubusercontent.com/78684195/114087198-42fbbd80-98bc-11eb-9f8b-b5b672f23325.png)
 
 > Car Update
 
