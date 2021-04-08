@@ -30,6 +30,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { CounterInputComponent } from './components/counter-input/counter-input.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     RegisterComponent,
     UserUpdateComponent,
     PaymentComponent,
-    HighlightDirective
+    HighlightDirective,
+    CounterInputComponent
   ],
   imports: [
     BrowserModule,

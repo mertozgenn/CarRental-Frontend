@@ -56,13 +56,7 @@
           <div class="mb-3">
             <label for="dailyPrice">Günlük Fiyat</label>
             <div class="form-group">
-              <input
-                type="number"
-                id="dailyPrice"
-                formControlName="dailyPrice"
-                class="form-control"
-                value="{{ carToUpdate.dailyPrice }}"
-              />
+              <app-counter-input formControlName="dailyPrice" type="number" class="form-control" value="{{ carToUpdate.dailyPrice }}"></app-counter-input>
             </div>
           </div>
           <div class="mb-3">
@@ -80,13 +74,7 @@
           <div class="mb-3">
             <label for="minFindeks">Min Findeks</label>
             <div class="form-group">
-              <input
-                type="number"
-                id="minFindeks"
-                formControlName="minFindeks"
-                class="form-control"
-                value="{{ carToUpdate.minFindeks }}"
-              />
+              <app-counter-input formControlName="minFindeks" type="number" class="form-control" value="{{ carToUpdate.minFindeks }}"></app-counter-input>
             </div>
           </div>
         </form>

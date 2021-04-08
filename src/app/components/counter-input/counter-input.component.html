@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-1">
+    <button class="btn btn-primary" (click)="decrease()" [disabled]="disabled">
+      -50
+    </button>
+  </div>
+  <div class="col">
+    <input
+      type="number"
+      class="form-control"
+      [value]="value"
+      [disabled]="disabled"
+    />
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" (click)="increase()" [disabled]="disabled">
+      +50
+    </button>
+  </div>
+</div>
