@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CreditCard } from '../models/creditCard';
-import { ListResponseModel } from '../models/listResponseModel';
 import { PaymentModel } from '../models/paymentModel';
-import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
@@ -13,9 +10,9 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class CreditCardService {
 
-  apiUrl = 'https://localhost:44350/api/'
+  apiUrl = 'https://localhost:5001/api/'
 
-  constructor(private httpClient:HttpClient, private toasterService:ToastrService) { }
+  constructor(private httpClient:HttpClient) { }
 
   getCreditCard() : Observable<SingleResponseModel<CreditCard>>{
     let userId = localStorage.getItem("userId")!
@@ -23,9 +20,7 @@ export class CreditCardService {
   }
 
   add(creditCard : CreditCard){
-    this.httpClient.post((this.apiUrl + 'creditcards/add'), creditCard).subscribe(response => {
-      this.toasterService.success("Kredi Kartı Kaydedildi")
-    })
+    return this.httpClient.post((this.apiUrl + 'creditcards/add'), creditCard)
   }
 
   pay(creditCard : CreditCard, totalPrice : number){

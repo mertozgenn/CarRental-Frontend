@@ -4,17 +4,23 @@ import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  apiUrl = 'https://localhost:44350/api/'
+  apiUrl = 'https://localhost:5001/api/'
   constructor(private httpClient : HttpClient) { }
 
   getCustomers() : Observable<ListResponseModel<Customer>> {
-    let url = this.apiUrl + "customers/getall";
+    let url = this.apiUrl + "customers/getAll";
     return this.httpClient.get<ListResponseModel<Customer>>(url);
+  }
+
+  getByUserId(userId:number) : Observable<SingleResponseModel<Customer>> {
+    let url = this.apiUrl + "customers/getByUserId?userId=" + userId;
+    return this.httpClient.get<SingleResponseModel<Customer>>(url);
   }
 
   add(customer:Customer) : Observable<ResponseModel> {

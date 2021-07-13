@@ -54,7 +54,7 @@ export class UserUpdateComponent implements OnInit {
 
   getUserDetails(){
     this.userService.getUser(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
-      this.userToUpdate = response.data[0]
+      this.userToUpdate = response.data
     })
   }
   getSavedCard() {

@@ -9,7 +9,7 @@ export class FindeksService {
 
   constructor() { }
 
-  getFindeks(userId:number) : number {
+  getUserFindeks(userId:number) : number {
     return parseInt((Math.random() * 1900).toString())
   }
 }

@@ -54,7 +54,9 @@ export class PaymentComponent implements OnInit {
   saveCreditCard() {
     let cardModel: CreditCard = Object.assign({}, this.paymentForm.value);
     cardModel.userId = parseInt(localStorage.getItem('userId')!);
-    this.creditCardService.add(cardModel);
+    this.creditCardService.add(cardModel).subscribe(response => {
+      this.toastrService.success("Kredi Kartı Kaydedildi")
+    });
   }
 
   rent() {
@@ -67,7 +69,9 @@ export class PaymentComponent implements OnInit {
           this.rentalService.addRental(rentModel).subscribe(
             (response) => {
               this.router.navigate(["/"])
-              if (this.save) this.saveCreditCard();
+              if (this.save) {
+                this.saveCreditCard()
+              }
               this.toastrService.success(response.message, 'Başarılı');
             },
             (responseError) => {

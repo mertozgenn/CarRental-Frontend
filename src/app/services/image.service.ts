@@ -8,16 +8,16 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root'
 })
 export class ImageService {
-  apiUrl = 'https://localhost:44350/api/'
+  apiUrl = 'https://localhost:5001/api/'
   constructor(private httpClient : HttpClient) { }
 
   getImageByCar(carId:number) : Observable<ListResponseModel<Image>> {
-    let url = this.apiUrl + "carimages/getbycarid?carid=" + carId;
+    let url = this.apiUrl + "carImages/getByCarId?carId=" + carId;
     return this.httpClient.get<ListResponseModel<Image>>(url);
   }
 
   uploadImage(file: File, carId : string) : Observable<HttpEvent<any>>{
-    let url = this.apiUrl + "carimages/add"
+    let url = this.apiUrl + "carImages/add"
     let formData = new FormData();
     formData.append('Image', file);
     formData.append('carId', carId)
@@ -25,7 +25,7 @@ export class ImageService {
   }
 
   deleteImage(image : Image){
-    let url = this.apiUrl + "carimages/delete"
+    let url = this.apiUrl + "carImages/delete"
     return this.httpClient.post(url, image)
   }
 }

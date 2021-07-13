@@ -9,7 +9,7 @@
           <th>Günlük Ücret</th>
       </tr>
   </thead>
-  <tr *ngFor="let car of cars"> 
+  <tr *ngIf="car"> 
       <td>{{car.carId}}</td>
       <td>{{car.description}}</td>
       <td>{{car.colorName}}</td>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div *ngFor="let car of cars" class="text-center">
+  <div *ngIf="car" class="text-center">
     <p></p>
     <p></p>
     <button *ngIf="isFindeksOk==true&&isLoggedIn==true" routerLink = "/rent/{{car.carId}}" class="btn btn-success">Kirala</button>

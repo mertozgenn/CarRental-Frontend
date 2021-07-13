@@ -30,7 +30,7 @@ export class NaviComponent implements OnInit {
 
   getLoggedUser(userId:number){
     this.userService.getUser(userId).subscribe(response => {
-      this.loggedUser = response.data[0]
+      this.loggedUser = response.data
       this.isAuthenticated = this.authService.isAuthenticated()
     })
   }

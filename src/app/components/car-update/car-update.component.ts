@@ -1,6 +1,5 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
@@ -17,7 +16,7 @@ export class CarUpdateComponent implements OnInit {
   carUpdateForm : FormGroup
   imageForm : FormGroup
   imageToUpload : FileList
-  imageFolder = "https://localhost:44350/pictures/"
+  imageFolder = "https://localhost:5001/pictures/"
   images:Image[] = []
   carToUpdate : Car = {carId : 0, brandId : 0, colorId : 0, modelYear:"", dailyPrice:0, description:"", minFindeks:0}
   constructor(private formBuilder:FormBuilder, private carService:CarService, 
@@ -35,8 +34,8 @@ export class CarUpdateComponent implements OnInit {
   }
 
   getCarDetails(carId:number){
-    this.carService.getCars().subscribe(response => {
-      this.carToUpdate = response.data.filter(c => c.carId == carId)[0]
+    this.carService.getById(carId).subscribe(response => {
+      this.carToUpdate = response.data
     })
   }
 

@@ -12,7 +12,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = "https://localhost:44350/api/"
+  apiUrl = "https://localhost:5001/api/"
   constructor(private httpClient : HttpClient) { }
 
   login(loginModel : LoginModel){
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   getUserId(): Observable<number>{
-   return this.httpClient.get<number>(this.apiUrl + "auth/getuserid")
+   return this.httpClient.get<number>(this.apiUrl + "auth/getUserId")
   }
 
   isAuthenticated(){

@@ -11,11 +11,11 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  apiUrl = "https://localhost:44350/api/"
+  apiUrl = "https://localhost:5001/api/"
   constructor(private httpClient : HttpClient) { }
 
-  getUser(userId:number) : Observable<ListResponseModel<User>>{
-    return this.httpClient.get<ListResponseModel<User>>(this.apiUrl + "users/getbyid?userid=" + userId)
+  getUser(userId:number) : Observable<SingleResponseModel<User>>{
+    return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl + "users/getById?userId=" + userId)
   }
 
   updateUser(user:User) : Observable<ResponseModel>{
@@ -23,6 +23,6 @@ export class UserService {
   }
 
   changePassword(password:string){
-    return this.httpClient.post(this.apiUrl + "users/changepassword", {"password" : password})
+    return this.httpClient.post(this.apiUrl + "users/changePassword", {"password" : password})
   }
 }

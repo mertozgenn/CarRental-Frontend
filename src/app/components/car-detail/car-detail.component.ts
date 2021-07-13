@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
 import { Image } from 'src/app/models/image';
-import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { FindeksService } from 'src/app/services/findeks.service';
 import { ImageService } from 'src/app/services/image.service';
-import { RentalService } from 'src/app/services/rental.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-car-detail',
@@ -16,21 +12,20 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
-  cars:CarDto[] = []
+  car:CarDto
   images:Image[] = []
   isFindeksOk : boolean
   findeks : number
   isLoggedIn = false
-  imageFolder = "https://localhost:44350/pictures/"
+  imageFolder = "https://localhost:5001/pictures/"
   constructor(private imageService:ImageService, private activatedRoute:ActivatedRoute
-            ,private carService:CarService, private rentalService:RentalService,
-            private findeksService:FindeksService, private authService : AuthService) { }
+            ,private carService:CarService, private findeksService:FindeksService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.getCarDetails(params["carId"])
       this.getImages(params["carId"])
-      this.getFindeks(params["carId"])
+      this.getCarFindeks(params["carId"])
     })
   }
   getImages(carId:number){
@@ -40,14 +35,14 @@ export class CarDetailComponent implements OnInit {
   }
   
   getCarDetails(carId:number) {
-    this.carService.getCarsDto().subscribe(response => {
-    this.cars = response.data.filter((c : CarDto) => c.carId == carId)
+    this.carService.getCarDtoById(carId).subscribe(response => {
+    this.car = response.data
     })
   }
 
-  getFindeks(carId:number) {
-    this.carService.getCars().subscribe(response => {
-    this.findeks = response.data.filter((c : Car) => c.carId == carId)[0].minFindeks
+  getCarFindeks(carId:number) {
+    this.carService.getCarFindeks(carId).subscribe(response => {
+    this.findeks = response.data
     this.checkFindeks()
     })
   }
@@ -56,7 +51,7 @@ export class CarDetailComponent implements OnInit {
     let userId = localStorage.getItem("userId")
     if(userId != null){
       this.isLoggedIn = true
-      this.isFindeksOk = (this.findeksService.getFindeks(parseInt(userId)) >= this.findeks)
+      this.isFindeksOk = (this.findeksService.getUserFindeks(parseInt(userId)) >= this.findeks)
     } else {
       this.isLoggedIn = false
       this.isFindeksOk = false

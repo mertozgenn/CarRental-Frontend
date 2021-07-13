@@ -1,5 +1,7 @@
+import { Car } from 'src/app/models/car';
+import { Customer } from 'src/app/models/customer';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
@@ -13,14 +15,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./rent.component.css']
 })
 export class RentComponent implements OnInit {
+  car:Car
+  customer:Customer
   rentForm : FormGroup
-  carId : number
   days : number
   totalPrice : number
-  companyName : string
-  customerId : number
   userName : string
-  dailyPrice:number
   rentDate: Date
   returnDate : Date
   available : boolean
@@ -30,44 +30,32 @@ export class RentComponent implements OnInit {
               private router : Router, private toasterService:ToastrService) { }
 
   ngOnInit(): void {
-    this.getCustomerId()
-    this.getCarId()
-    this.getDailyPrice()
+    this.getCustomer()
+    this.getCar()
     this.getDays()
     this.getUserName()
-    this.getCompanyName()
     this.createRentForm()
   }
 
-  getCompanyName(){
-    this.customerService.getCustomers().subscribe(response => {
-      this.companyName = response.data.filter(c => c.userId == parseInt(localStorage.getItem("userId")!))[0].companyName
+  getCustomer(){
+    this.customerService.getByUserId(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
+      this.customer = response.data
     })
   }
 
-  getCustomerId(){
-    this.customerService.getCustomers().subscribe(response => {
-      this.customerId = response.data.filter(c => c.userId == parseInt(localStorage.getItem("userId")!))[0].id
-      this.createRentForm()
-    })
-  }
 
   getUserName(){
     this.userService.getUser(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
-      this.userName = response.data[0].firstName + " " + response.data[0].lastName
+      this.userName = response.data.firstName + " " + response.data.lastName
     })
   }
 
 
-  getCarId(){
+  getCar(){
     this.activatedRoute.params.subscribe(params => {
-      this.carId = parseInt(params["carId"])
-    })
-  }
-
-  getDailyPrice(){
-    this.carService.getCarsDto().subscribe(response => {
-      this.dailyPrice = response.data.filter(c => c.carId == this.carId)[0].dailyPrice
+      this.carService.getById(parseInt(params["carId"])).subscribe(response => {
+        this.car = response.data
+      })
     })
   }
 
@@ -78,21 +66,21 @@ export class RentComponent implements OnInit {
   }
 
   getTotalPrice(days:number){
-    this.totalPrice = this.dailyPrice * days
+    this.totalPrice = this.car.dailyPrice * days
   }
 
   checkIfAvailable(carId:number){
-    var rent = new Date(this.rentDate).getTime();
-    var returnn = new Date(this.returnDate).getTime();
+    var startDay = new Date(this.rentDate).getTime();
+    var endDay = new Date(this.returnDate).getTime();
     var now = Date.now()
 
-    if(returnn < now || rent < now) {
+    if(endDay < now || startDay < now) {
       this.toasterService.info("Tarih bugünden küçük olamaz")
       this.available = false
       return
     }
 
-    if(returnn < rent){
+    if(endDay < startDay){
       this.available = false
       return
     }
@@ -106,18 +94,18 @@ export class RentComponent implements OnInit {
     this.rentalService.getRentals().subscribe(response => {
       this.available = !(response.data.filter(r => 
         r.carId==carId && 
-        (new Date(r.returnDate).getTime()==returnn ||
-        new Date(r.rentDate).getTime()==rent ||
-        (rent < new Date(r.rentDate).getTime() &&  
-        new Date(r.returnDate).getTime() < returnn))).length > 0)
+        (new Date(r.returnDate).getTime()==endDay ||
+        new Date(r.rentDate).getTime()==startDay ||
+        (startDay < new Date(r.rentDate).getTime() &&  
+        new Date(r.returnDate).getTime() < endDay))).length > 0)
     })
   }
 }
 
   createRentForm(){
     this.rentForm = this.formBuilder.group({
-      carId : [this.carId],
-      customerId : [this.customerId],
+      carId : [this.car.carId],
+      customerId : [this.customer.id],
       rentDate : [this.rentDate],
       returnDate : [this.returnDate]
     })
@@ -139,7 +127,7 @@ export class RentComponent implements OnInit {
 
 calculate(){
   this.getTotalPrice(this.getDays())
-  this.checkIfAvailable(this.carId)
+  this.checkIfAvailable(this.car.carId)
 }
 
 }
