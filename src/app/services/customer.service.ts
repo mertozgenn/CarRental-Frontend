@@ -18,8 +18,8 @@ export class CustomerService {
     return this.httpClient.get<ListResponseModel<Customer>>(url);
   }
 
-  getByUserId(userId:number) : Observable<SingleResponseModel<Customer>> {
-    let url = this.apiUrl + "customers/getByUserId?userId=" + userId;
+  get() : Observable<SingleResponseModel<Customer>> {
+    let url = this.apiUrl + "customers/getByUserId";
     return this.httpClient.get<SingleResponseModel<Customer>>(url);
   }
 

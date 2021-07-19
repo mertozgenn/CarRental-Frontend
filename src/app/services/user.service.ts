@@ -14,8 +14,8 @@ export class UserService {
   apiUrl = "https://localhost:5001/api/"
   constructor(private httpClient : HttpClient) { }
 
-  getUser(userId:number) : Observable<SingleResponseModel<User>>{
-    return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl + "users/getById?userId=" + userId)
+  getUser() : Observable<SingleResponseModel<User>>{
+    return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl + "users/get")
   }
 
   updateUser(user:User) : Observable<ResponseModel>{

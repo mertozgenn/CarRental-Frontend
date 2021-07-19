@@ -30,22 +30,21 @@ export class RentComponent implements OnInit {
               private router : Router, private toasterService:ToastrService) { }
 
   ngOnInit(): void {
-    this.getCustomer()
     this.getCar()
+    this.getCustomer()
     this.getDays()
     this.getUserName()
-    this.createRentForm()
   }
 
   getCustomer(){
-    this.customerService.getByUserId(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
+    this.customerService.get().subscribe(response => {
       this.customer = response.data
     })
   }
 
 
   getUserName(){
-    this.userService.getUser(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
+    this.userService.getUser().subscribe(response => {
       this.userName = response.data.firstName + " " + response.data.lastName
     })
   }
@@ -55,6 +54,7 @@ export class RentComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.carService.getById(parseInt(params["carId"])).subscribe(response => {
         this.car = response.data
+        this.createRentForm()
       })
     })
   }
@@ -104,8 +104,8 @@ export class RentComponent implements OnInit {
 
   createRentForm(){
     this.rentForm = this.formBuilder.group({
-      carId : [this.car.carId],
-      customerId : [this.customer.id],
+      carId : [this.car?.carId],
+      customerId : [this.customer?.id],
       rentDate : [this.rentDate],
       returnDate : [this.returnDate]
     })

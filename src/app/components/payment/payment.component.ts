@@ -53,7 +53,6 @@ export class PaymentComponent implements OnInit {
 
   saveCreditCard() {
     let cardModel: CreditCard = Object.assign({}, this.paymentForm.value);
-    cardModel.userId = parseInt(localStorage.getItem('userId')!);
     this.creditCardService.add(cardModel).subscribe(response => {
       this.toastrService.success("Kredi Kartı Kaydedildi")
     });

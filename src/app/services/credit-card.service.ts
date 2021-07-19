@@ -15,8 +15,7 @@ export class CreditCardService {
   constructor(private httpClient:HttpClient) { }
 
   getCreditCard() : Observable<SingleResponseModel<CreditCard>>{
-    let userId = localStorage.getItem("userId")!
-    return this.httpClient.get<SingleResponseModel<CreditCard>>(this.apiUrl + "creditcards/get?userId=" + userId)
+    return this.httpClient.get<SingleResponseModel<CreditCard>>(this.apiUrl + "creditcards/get")
   }
 
   add(creditCard : CreditCard){

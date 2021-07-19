@@ -53,7 +53,7 @@ export class UserUpdateComponent implements OnInit {
   }
 
   getUserDetails(){
-    this.userService.getUser(parseInt(localStorage.getItem("userId")!)).subscribe(response => {
+    this.userService.getUser().subscribe(response => {
       this.userToUpdate = response.data
     })
   }

@@ -49,7 +49,6 @@ export class RegisterComponent implements OnInit {
 
   addCustomer(){
     let customerModel : Customer = Object.assign({}, this.registerForm.value)
-    customerModel.userId = parseInt(localStorage.getItem("userId")!)
     this.customerService.add(customerModel).subscribe(response => {
     })
     location.reload()
