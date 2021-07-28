@@ -32,6 +32,9 @@ export class NaviComponent implements OnInit {
     this.userService.getUser().subscribe(response => {
       this.loggedUser = response.data
       this.isAuthenticated = this.authService.isAuthenticated()
+    }, error=>{
+      localStorage.removeItem("userId")
+      localStorage.removeItem("token")
     })
   }
 

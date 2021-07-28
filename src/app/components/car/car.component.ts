@@ -14,6 +14,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarComponent implements OnInit {
 cars: CarDto[] = [];
+imageFolder = "https://localhost:5001/pictures/"
 brands : Brand[] = []
 selectedBrandName : string = "Marka Seçin"
 colors : Color[] = []

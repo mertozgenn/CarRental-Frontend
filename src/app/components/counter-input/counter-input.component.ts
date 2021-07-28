@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class CounterInputComponent implements OnInit, ControlValueAccessor {
 
-  @Input() value : number
+  @Input() value : any
   disabled = false
 
   onChange: any = () => { }
@@ -25,6 +25,7 @@ export class CounterInputComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit(): void {
+    this.value = parseFloat(this.value)
   }
 
   increase() {

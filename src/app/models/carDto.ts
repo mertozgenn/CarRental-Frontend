@@ -1,3 +1,5 @@
+import { Image } from "./image";
+
 export interface CarDto{
     carId:number;
     description:string;
@@ -5,4 +7,5 @@ export interface CarDto{
     brandName:string;
     modelYear:string;
     dailyPrice:number;
+    images:Image[]
 }

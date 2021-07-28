@@ -19,10 +19,10 @@ import { RentComponent } from './components/rent/rent.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { LoginGuard } from './guards/login.guard';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 const routes: Routes = [
-  {path:"", pathMatch:"full", component:CarComponent},
-  {path:"", pathMatch:"full", component:CategoryComponent},
+  {path:"", pathMatch:"full", component:HomepageComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
   {path:"pay", component:PaymentComponent, canActivate:[LoginGuard]},

@@ -1,44 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a routerLink = "" class="navbar-brand" href="#">Arabalar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="customers">Müşteriler</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="colors">Renkler</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="brands">Markalar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="rentals">Kiralamalar</a>
-          </li>
-        </ul>
-        <div *ngIf="isAuthenticated==false" class="d-flex">
-          <button routerLink="login" class="btn btn-outline-success">Giriş Yap</button>
-          <button routerLink="register" class="btn btn-outline-success">Kayıt Ol</button>
-        </div>
-        <div class="d-flex">
-          <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a routerLink="" class="navbar-brand" href="#">Ana Sayfa</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cars">Arabalar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="customers">Müşteriler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="colors">Renkler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="brands">Markalar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rentals">Kiralamalar</a>
+        </li>
+      </ul>
+      <div *ngIf="isAuthenticated==false" class="d-flex">
+        <button routerLink="login" class="btn btn-outline-success">Giriş Yap</button>
+        <button routerLink="register" class="btn btn-outline-success">Kayıt Ol</button>
+      </div>
+      <div class="d-flex">
+        <ul class="navbar-nav me-auto mb-3 mb-lg-0">
           <li *ngIf="isAuthenticated==true" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               {{loggedUser.firstName}} {{loggedUser.lastName}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" routerLink="user/update">Profili Düzenle</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item" (click)="logout()">Çıkış Yap</a></li>
             </ul>
           </li>
-          </ul>
-        </div>
-        
+        </ul>
       </div>
-    </div>
-  </nav>
 
+    </div>
+  </div>
+</nav>

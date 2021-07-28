@@ -24,13 +24,15 @@ import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component'; 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { CounterInputComponent } from './components/counter-input/counter-input.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { CounterInputComponent } from './components/counter-input/counter-input.
     UserUpdateComponent,
     PaymentComponent,
     HighlightDirective,
-    CounterInputComponent
+    CounterInputComponent,
+    HomepageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

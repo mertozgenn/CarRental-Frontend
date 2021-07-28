@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-3">
-   <app-category></app-category>
+    <app-category></app-category>
   </div>
   <div class="col">
     <div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status">
@@ -40,46 +40,37 @@
         </button>
       </div>
     </div>
-    <table *ngIf="dataLoaded == true" class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Açıklama</th>
-          <th>Renk</th>
-          <th>Marka</th>
-          <th>Yıl</th>
-          <th>Günlük Ücret</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr routerLink="/cars/{{ car.carId }}" *ngFor="let car of cars | filterPipe: filterText">
-          <td>{{ car.carId }}</td>
-          <td>{{ car.description }}</td>
-          <td>{{ car.colorName }}</td>
-          <td>{{ car.brandName }}</td>
-          <td>{{ car.modelYear }}</td>
-          <td>{{ car.dailyPrice }}</td>
-          <td>
-            <button routerLink="/cars/{{ car.carId }}" class="btn btn-success">
+    <div *ngIf="dataLoaded == true" class="row row-cols-1 row-cols-md-3">
+      <div *ngFor="let car of cars | filterPipe: filterText" class="col mb-4">
+        <div class="card h-130" style="width: 18rem;">
+          <div style="min-block-size: 250px;" class="container">
+            <img src="{{imageFolder}}{{car.images[0].imagePath}}" style="margin-top: 2em;" class="img-fluid" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ car.description }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Renk: {{ car.colorName }} </li>
+            <li class="list-group-item">Marka: {{ car.brandName }}</li>
+            <li class="list-group-item">Yıl: {{ car.modelYear }}</li>
+            <li class="list-group-item">Günlük Ücret: {{ car.dailyPrice }}</li>
+          </ul>
+          <div class="card-body">
+            <button routerLink="/cars/{{ car.carId }}" style="margin-right: 2em;" class="btn btn-success">
               Araba Detayı
             </button>
-          </td>
-          <td>
             <button type="button" routerLink="/cars/update/{{ car.carId }}" class="btn btn-primary">
               Güncelle
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="text-center">
-      <p></p>
-      <p></p>
-      <button routerLink="/cars/add" class="btn btn-success">Araba Ekle</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
+  <div class="text-center">
+    <p></p>
+    <p></p>
+    <button routerLink="/cars/add" class="btn btn-success">Araba Ekle</button>
   </div>
 </div>

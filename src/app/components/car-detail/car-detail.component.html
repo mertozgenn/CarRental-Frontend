@@ -20,7 +20,7 @@
 </table>
 <h3><strong>Araç Fotoğrafları</strong></h3>
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div *ngFor="let image of images" class="col">
+    <div *ngFor="let image of car?.images" class="col">
       <div class="card">
         <img src="{{imageFolder}}{{image.imagePath}}" class="card-img-top" alt="...">
       </div>
