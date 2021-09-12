@@ -12,30 +12,29 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm:FormGroup
+  registerForm: FormGroup
 
-  constructor(private formBuilder:FormBuilder, private authService:AuthService,
-               private toastrService:ToastrService, private router:Router, private customerService : CustomerService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+    private toastrService: ToastrService, private router: Router, private customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.createRegisterForm()
   }
 
-  createRegisterForm(){
+  createRegisterForm() {
     this.registerForm = this.formBuilder.group({
-      email:["", Validators.required],
-      password:["", Validators.required],
-      firstName:["", Validators.required],
-      lastName:["", Validators.required],
-      companyName:["", Validators.required]
+      email: ["", Validators.required],
+      password: ["", Validators.required],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      companyName: ["", Validators.required]
     })
   }
 
-  register(){
-    if(this.registerForm.valid){
+  register() {
+    if (this.registerForm.valid) {
       let registerModel = Object.assign({}, this.registerForm.value)
       this.authService.register(registerModel).subscribe(response => {
-        this.toastrService.info(response.message)
         localStorage.setItem("token", response.data.token)
         this.authService.getUserId().subscribe(userId => {
           localStorage.setItem("userId", userId.toString())
@@ -47,13 +46,12 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  addCustomer(){
-    let customerModel : Customer = Object.assign({}, this.registerForm.value)
+  addCustomer() {
+    let customerModel: Customer = Object.assign({}, this.registerForm.value)
     this.customerService.add(customerModel).subscribe(response => {
+      this.router.navigateByUrl("").then(() => {
+        location.reload()
+      })
     })
-    location.reload()
-    this.router.navigate([""])
   }
-
-
 }

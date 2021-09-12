@@ -113,8 +113,10 @@ export class RentComponent implements OnInit {
 
   goPayment(){
      let rentModel = Object.assign({}, this.rentForm.value)
+     rentModel.carId = this.car.carId
      rentModel.rentDate = this.rentDate
      rentModel.returnDate = this.returnDate
+     rentModel.customerId = this.customer.id
       if(this.rentForm.valid){
       this.rentalService.setRentModel(rentModel)
       this.rentalService.setTotalPrice(this.totalPrice)
