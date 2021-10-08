@@ -1,53 +1,45 @@
 
-### About Project
-
-- This project is a car rental front-end project for [kodlama.io](https://www.kodlama.io) assignments
 - [Back-end](https://github.com/mertozgenn/ReCapProject)
 ---
 
 ### Images
 
 
-![](https://user-images.githubusercontent.com/78684195/113748831-a09fd680-9711-11eb-9edd-a4b676f8a1d2.png)
+![](https://user-images.githubusercontent.com/78684195/136613347-d8d03bdf-e454-4ab7-8521-aa51e3da1841.png)
 
 > Home Page
 
-![](https://user-images.githubusercontent.com/78684195/113749898-d5605d80-9712-11eb-9c17-28049b24d002.png)
+![](https://user-images.githubusercontent.com/78684195/136613471-9959f493-c950-4f32-8f51-1c9614a794af.png)
+
+> Cars
+
+![](https://user-images.githubusercontent.com/78684195/136615102-64d8cb39-9637-40eb-bcca-7e2ad5bd55b8.png)
 
 > Car Detail
 
-![](https://user-images.githubusercontent.com/78684195/114087198-42fbbd80-98bc-11eb-9f8b-b5b672f23325.png)
+![](https://user-images.githubusercontent.com/78684195/136613673-e1cdced8-7d06-4361-9859-d6ddf00ce9df.png)
 
 > Car Update
 
-![](https://user-images.githubusercontent.com/78684195/113750193-283a1500-9713-11eb-9cc7-8498811f6fdd.png)
+![](https://user-images.githubusercontent.com/78684195/136613883-74e2f457-ecd4-4a3e-8d06-9b59bbbbf010.png)
 
-> Car Rent (Car is not available)
+> Car Rent
 
-![](https://user-images.githubusercontent.com/78684195/113750642-c201c200-9713-11eb-995c-7af31d493192.png)
-
-> Car Rent (Car is available)
-
-![](https://user-images.githubusercontent.com/78684195/113750766-e78ecb80-9713-11eb-9e4a-f5dbc8aa4796.png)
+![](https://user-images.githubusercontent.com/78684195/136613946-83268213-63cd-4543-97c5-eb6cf8eaa546.png)
 
 > Payment
 
-![](https://user-images.githubusercontent.com/78684195/113750506-9088f680-9713-11eb-9b49-351d9462801f.png)
+![](https://user-images.githubusercontent.com/78684195/136614006-d114569d-c6b4-431b-8dfe-0cde21ed70d8.png)
 
 > Update Profile
 
-![](https://user-images.githubusercontent.com/78684195/113750975-14db7980-9714-11eb-8627-f1cd59dd3d3c.png)
+![](https://user-images.githubusercontent.com/78684195/136614040-2cacee51-47fb-470d-8318-8a2cc2a87501.png)
 
 > Register
 
 ---
-### Notes
 
-- Findeks and payment processes are not real.
-
----
-
-# Recap
+# CarRental
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
