@@ -1,5 +1,4 @@
 
-- [Live Demo https://mertozgenn.github.io/CarRental-Frontend/](https://mertozgenn.github.io/CarRental-Frontend/)
 - [Back-end](https://github.com/mertozgenn/ReCapProject)
 ---
 
