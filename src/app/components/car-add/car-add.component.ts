@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
@@ -10,8 +10,8 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
-  carAddForm : FormGroup
-  constructor(private formBuilder : FormBuilder, private toastrService : ToastrService,
+  carAddForm : UntypedFormGroup
+  constructor(private formBuilder : UntypedFormBuilder, private toastrService : ToastrService,
                private carService : CarService, private router:Router) { }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
@@ -17,7 +17,7 @@ import { UserService } from 'src/app/services/user.service';
 export class RentComponent implements OnInit {
   car:Car
   customer:Customer
-  rentForm : FormGroup
+  rentForm : UntypedFormGroup
   days : number
   totalPrice : number
   userName : string
@@ -25,7 +25,7 @@ export class RentComponent implements OnInit {
   returnDate : Date
   available : boolean
   constructor(private activatedRoute:ActivatedRoute, private rentalService:RentalService, 
-              private formBuilder:FormBuilder, private carService:CarService,
+              private formBuilder:UntypedFormBuilder, private carService:CarService,
               private customerService:CustomerService, private userService : UserService,
               private router : Router, private toasterService:ToastrService) { }
 

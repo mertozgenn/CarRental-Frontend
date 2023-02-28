@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ColorService } from 'src/app/services/color.service';
@@ -10,10 +10,10 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./color-update.component.css']
 })
 export class ColorUpdateComponent implements OnInit {
-  colorUpdateForm : FormGroup
+  colorUpdateForm : UntypedFormGroup
   colorId:number
   colorName:string
-  constructor(private formBuilder:FormBuilder, private colorService:ColorService, 
+  constructor(private formBuilder:UntypedFormBuilder, private colorService:ColorService, 
               private toastrService:ToastrService, private activatedRoute:ActivatedRoute,
               private router:Router) { }
 

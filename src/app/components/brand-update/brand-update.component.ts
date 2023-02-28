@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from 'src/app/services/brand.service';
@@ -10,10 +10,10 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand-update.component.css']
 })
 export class BrandUpdateComponent implements OnInit {
-  brandUpdateForm : FormGroup
+  brandUpdateForm : UntypedFormGroup
   brandId:number
   brandName:string
-  constructor(private formBuilder:FormBuilder, private brandService:BrandService, 
+  constructor(private formBuilder:UntypedFormBuilder, private brandService:BrandService, 
               private toastrService:ToastrService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {

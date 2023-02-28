@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreditCard } from 'src/app/models/creditCard';
@@ -16,16 +16,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-update.component.css']
 })
 export class UserUpdateComponent implements OnInit {
-  userForm:FormGroup
+  userForm:UntypedFormGroup
   email : string
   firstName : string
   lastName : string
   companyName : string
-  newPasswordForm : FormGroup
+  newPasswordForm : UntypedFormGroup
   savedCard: CreditCard;
   userToUpdate : User = {companyName:"", email:"", firstName:"", lastName:""}
 
-  constructor(private formBuilder:FormBuilder, private authService:AuthService,
+  constructor(private formBuilder:UntypedFormBuilder, private authService:AuthService,
                private toastrService:ToastrService, private router:Router, private customerService : CustomerService,
                 private userService : UserService, private creditCardService:CreditCardService) { }
 

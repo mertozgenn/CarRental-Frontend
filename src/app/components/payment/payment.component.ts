@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreditCard } from 'src/app/models/creditCard';
@@ -12,15 +12,15 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  rentForm: FormGroup;
-  paymentForm: FormGroup;
+  rentForm: UntypedFormGroup;
+  paymentForm: UntypedFormGroup;
   savedCard: CreditCard;
   save: boolean = false;
   totalPrice: number;
 
   constructor(
     private creditCardService: CreditCardService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private rentalService: RentalService,
     private toastrService: ToastrService,
     private router : Router

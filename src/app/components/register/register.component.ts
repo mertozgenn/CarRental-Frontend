@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
@@ -12,9 +12,9 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup
+  registerForm: UntypedFormGroup
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+  constructor(private formBuilder: UntypedFormBuilder, private authService: AuthService,
     private toastrService: ToastrService, private router: Router, private customerService: CustomerService) { }
 
   ngOnInit(): void {

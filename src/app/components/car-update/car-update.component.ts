@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
@@ -13,13 +13,13 @@ import { ImageService } from 'src/app/services/image.service';
   styleUrls: ['./car-update.component.css']
 })
 export class CarUpdateComponent implements OnInit {
-  carUpdateForm : FormGroup
-  imageForm : FormGroup
+  carUpdateForm : UntypedFormGroup
+  imageForm : UntypedFormGroup
   imageToUpload : FileList
   imageFolder = "https://localhost:5001/pictures/"
   images:Image[] = []
   carToUpdate : Car = {carId : 0, brandId : 0, colorId : 0, modelYear:"", dailyPrice:0, description:"", minFindeks:0}
-  constructor(private formBuilder:FormBuilder, private carService:CarService, 
+  constructor(private formBuilder:UntypedFormBuilder, private carService:CarService, 
               private toastrService:ToastrService, private activatedRoute:ActivatedRoute,
               private router:Router, private imageService : ImageService) { }
 
