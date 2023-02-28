@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Car } from '../models/car';
 import { CarDto } from '../models/carDto';
+import { CarFilterModel } from '../models/carFilterModel';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
@@ -18,13 +19,17 @@ export class CarService {
   }
 
   getCarsDto() : Observable<ListResponseModel<CarDto>> {
-    let url = this.apiUrl + "cars/getCarDetails";
+    let url = this.apiUrl + "cars/getall";
     return this.httpClient.get<ListResponseModel<CarDto>>(url);
   }
 
   getCarDtoById(id:number) : Observable<SingleResponseModel<CarDto>> {
-    let url = this.apiUrl + "cars/getCarDetailsById?id=" + id;
+    let url = this.apiUrl + "cars/getById?id=" + id;
     return this.httpClient.get<SingleResponseModel<CarDto>>(url);
+  }
+
+  getCarsByFilter(filter: CarFilterModel) : Observable<ListResponseModel<CarDto>> {
+    return this.httpClient.post<ListResponseModel<CarDto>>(this.apiUrl + "cars/getByFilter", filter);
   }
 
   getCarFindeks(id:number) : Observable<SingleResponseModel<number>> {
@@ -40,16 +45,6 @@ export class CarService {
   getById(id:number) : Observable<SingleResponseModel<Car>> {
     let url = this.apiUrl + "cars/getById?id=" + id;
     return this.httpClient.get<SingleResponseModel<Car>>(url);
-  }
-
-  getCarsByColor(colorId:number) : Observable<ListResponseModel<CarDto>> {
-    let url = this.apiUrl + "cars/getAllByColor?colorId=" + colorId;
-    return this.httpClient.get<ListResponseModel<CarDto>>(url);
-  }
-
-  getCarsByBrand(brandId:number) : Observable<ListResponseModel<CarDto>> {
-    let url = this.apiUrl + "cars/getAllByBrand?brandId=" + brandId;
-    return this.httpClient.get<ListResponseModel<CarDto>>(url);
   }
 
   add(car:Car) {

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row m-2">
   <div class="col-md-3">
     <app-category></app-category>
   </div>
@@ -16,26 +16,25 @@
     <div *ngIf="filterText" class="alert alert-primary">
       {{ filterText }} aradınız.
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-5">
-        <select [(ngModel)]="selectedColorName" id="color-select" class="form-control form-control-sm">
-          <option value="Renk Seçin" disabled>Renk Seçin</option>
-          <option *ngFor="let color of colors" [ngValue]="color.colorName">
+        <select [(ngModel)]="selectedColorId" id="color-select" class="form-control form-control-sm">
+          <option value="0" selected disabled>Renk Seçin</option>
+          <option *ngFor="let color of colors" [ngValue]="color.colorId">
             {{ color.colorName }}
           </option>
         </select>
       </div>
       <div class="col-md-5">
-        <select [(ngModel)]="selectedBrandName" class="form-control form-control-sm" id="brand-select">
-          <option value="Marka Seçin" disabled selected>Marka Seçin</option>
-          <option *ngFor="let brand of brands" [ngValue]="brand.brandName">
+        <select [(ngModel)]="selectedBrandId" class="form-control form-control-sm" id="brand-select">
+          <option value="0" selected disabled selected>Marka Seçin</option>
+          <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
             {{ brand.brandName }}
           </option>
         </select>
       </div>
       <div class="col-md-2">
-        <label> </label>
-        <button type="button" class="btn btn-primary" (click)="applyFilter()">
+        <button type="button" class="btn btn-primary btn-sm" (click)="applyFilter()">
           Filtrele
         </button>
       </div>
@@ -44,7 +43,7 @@
       <div *ngFor="let car of cars | filterPipe: filterText" class="col mb-4">
         <div class="card h-130" style="width: 18rem;">
           <div style="min-block-size: 250px;" class="container">
-            <img src="{{imageFolder}}{{car.images[0].imagePath}}" style="margin-top: 2em;" class="img-fluid" alt="...">
+            <img src="{{rootImagePath}}{{car.images[0].imagePath}}" style="margin-top: 2em;" class="img-fluid" alt="...">
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ car.description }}</h5>

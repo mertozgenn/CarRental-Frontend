@@ -10,8 +10,10 @@ import { ListResponseModel } from '../models/listResponseModel';
 })
 export class ImageService {
   apiUrl: string;
+  rootApiUrl: string;
   constructor(private httpClient: HttpClient) {
     this.apiUrl = environment.environment.apiUrl
+    this.rootApiUrl = environment.environment.rootApiUrl
   }
 
   getImageByCar(carId:number) : Observable<ListResponseModel<Image>> {
@@ -30,5 +32,9 @@ export class ImageService {
   deleteImage(image : Image){
     let url = this.apiUrl + "carImages/delete"
     return this.httpClient.post(url, image)
+  }
+
+  getBaseImageUrl(){
+    return this.rootApiUrl + "/pictures/";
   }
 }

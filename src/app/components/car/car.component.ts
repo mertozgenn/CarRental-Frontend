@@ -1,3 +1,4 @@
+import { ImageService } from 'src/app/services/image.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Brand } from 'src/app/models/brand';
@@ -14,18 +15,20 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarComponent implements OnInit {
 cars: CarDto[] = [];
-imageFolder = "https://localhost:5001/pictures/"
+rootImagePath: string
 brands : Brand[] = []
-selectedBrandName : string = "Marka Seçin"
+selectedBrandId: number = 0
 colors : Color[] = []
-selectedColorName : string = "Renk Seçin"
+selectedColorId: number = 0
 dataLoaded = false;
 filterText:string
 
   constructor(private carService:CarService, private activatedRoute:ActivatedRoute,
-              private colorService:ColorService, private brandService : BrandService) { }
+              private colorService:ColorService, private brandService : BrandService, 
+              private imageService: ImageService) { }
 
   ngOnInit(): void {
+    this.rootImagePath = this.imageService.getBaseImageUrl()
     this.activatedRoute.params.subscribe(params => {
       if(params["colorId"]){
         this.getCarsByColor(params["colorId"]);
@@ -60,23 +63,21 @@ filterText:string
   }
 
   applyFilter(){
-    this.carService.getCarsDto().subscribe(response => {
-      if(this.selectedColorName != "Renk Seçin")
-      this.cars = response.data.filter(c => c.colorName == this.selectedColorName)
-      if(this.selectedBrandName != "Marka Seçin")
-      this.cars = response.data.filter(c => c.brandName == this.selectedBrandName)
+    this.carService.getCarsByFilter({brandId: this.selectedBrandId, colorId: this.selectedColorId}).subscribe(response => {
+      this.cars = response.data
+      this.dataLoaded = true
     })
   }
 
   getCarsByColor(colorId:number){
-    this.carService.getCarsByColor(colorId).subscribe(response => {
+    this.carService.getCarsByFilter({colorId: colorId, brandId: null}).subscribe(response => {
       this.cars = response.data
       this.dataLoaded = true
     })
   }
 
   getCarsByBrand(brandId:number){
-    this.carService.getCarsByBrand(brandId).subscribe(response => {
+    this.carService.getCarsByFilter({brandId: brandId, colorId: null}).subscribe(response => {
       this.cars = response.data
       this.dataLoaded = true
     })
