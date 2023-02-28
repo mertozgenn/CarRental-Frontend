@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -33,6 +33,11 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { CounterInputComponent } from './components/counter-input/counter-input.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AppInitService } from './services/app-init.service';
+
+export function init_app(appLoadService: AppInitService) {
+  return () => appLoadService.readConfigFile();
+}
 
 @NgModule({
   declarations: [
@@ -74,6 +79,13 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule
   ],
   providers: [
+    AppInitService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init_app,
+      deps: [AppInitService],
+      multi: true
+    },
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
   ],
   bootstrap: [AppComponent]

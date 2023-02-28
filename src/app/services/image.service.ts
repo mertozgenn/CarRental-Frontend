@@ -1,6 +1,7 @@
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Image } from '../models/image';
 import { ListResponseModel } from '../models/listResponseModel';
 
@@ -8,8 +9,10 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root'
 })
 export class ImageService {
-  apiUrl = 'https://localhost:5001/api/'
-  constructor(private httpClient : HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getImageByCar(carId:number) : Observable<ListResponseModel<Image>> {
     let url = this.apiUrl + "carImages/getByCarId?carId=" + carId;

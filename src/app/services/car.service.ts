@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Car } from '../models/car';
 import { CarDto } from '../models/carDto';
 import { ListResponseModel } from '../models/listResponseModel';
@@ -11,8 +12,10 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class CarService {
-  apiUrl = 'https://localhost:5001/api/'
-  constructor(private httpClient : HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getCarsDto() : Observable<ListResponseModel<CarDto>> {
     let url = this.apiUrl + "cars/getCarDetails";

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Rental } from '../models/rental';
 import { RentalDto } from '../models/rentalDto';
@@ -10,10 +11,12 @@ import { ResponseModel } from '../models/responseModel';
   providedIn: 'root'
 })
 export class RentalService {
-  apiUrl = 'https://localhost:5001/api/'
+  apiUrl: string;
   private rentModel : Rental
   private totalPrice : number
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getRentalsDto() : Observable<ListResponseModel<RentalDto>> {
     let url = this.apiUrl + "rentals/getRentalDetails";

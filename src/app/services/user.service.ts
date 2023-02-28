@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListResponseModel } from '../models/listResponseModel';
+import { environment } from 'src/environments/environment';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { User } from '../models/user';
@@ -10,9 +10,10 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-
-  apiUrl = "https://localhost:5001/api/"
-  constructor(private httpClient : HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getUser() : Observable<SingleResponseModel<User>>{
     return this.httpClient.get<SingleResponseModel<User>>(this.apiUrl + "users/get")

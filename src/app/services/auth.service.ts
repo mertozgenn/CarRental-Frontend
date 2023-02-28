@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListResponseModel } from '../models/listResponseModel';
+import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/loginModel';
 import { RegisterModel } from '../models/registerModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = "https://localhost:5001/api/"
-  constructor(private httpClient : HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   login(loginModel : LoginModel){
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "auth/login", loginModel)

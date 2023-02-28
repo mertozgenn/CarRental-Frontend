@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Customer } from '../models/customer';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
@@ -10,8 +11,10 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class CustomerService {
-  apiUrl = 'https://localhost:5001/api/'
-  constructor(private httpClient : HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getCustomers() : Observable<ListResponseModel<Customer>> {
     let url = this.apiUrl + "customers/getAll";

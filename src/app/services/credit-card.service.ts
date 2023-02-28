@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { CreditCard } from '../models/creditCard';
 import { PaymentModel } from '../models/paymentModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
@@ -9,10 +10,10 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class CreditCardService {
-
-  apiUrl = 'https://localhost:5001/api/'
-
-  constructor(private httpClient:HttpClient) { }
+  apiUrl: string;
+  constructor(private httpClient: HttpClient) {
+    this.apiUrl = environment.environment.apiUrl
+  }
 
   getCreditCard() : Observable<SingleResponseModel<CreditCard>>{
     return this.httpClient.get<SingleResponseModel<CreditCard>>(this.apiUrl + "creditcards/get")
